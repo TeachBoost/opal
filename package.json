@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "main": "index.html",
   "description": "Secure file sharing using Keybase",
+  "license": "GPLv3",
   "window": {
     "toolbar": false,
     "width": 640,
