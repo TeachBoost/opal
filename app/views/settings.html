@@ -1,11 +1,19 @@
 {{> nav }}
 
 <section class="page">
-    <h3>Settings</h3>
-    <div data-bind="visible: ! shareDir">
-        Before you begin, please set the location of your shared directory.
+    <h3 class="margin-bottom-20">Settings</h3>
+    <div data-bind="visible: ! shareDir" class="tip margin-bottom-20 round-3">
+        <span>Before you begin, please set the location of your shared directory.</span>
     </div>
-    <form>
-        <input type="text" name="path" />
-    </form>
+    <div data-bind="visible: shareDir" class="margin-bottom-10">
+        <label>Shared Folder:</label>
+    </div>
+    <div class="margin-bottom-10">
+        <input type="text" data-bind="value: shareDir" class="w100p" disabled />
+        <input type="file" name="shareDir" webkitdirectory directory
+            style="display: none;" />
+    </div>
+    <a class="gray button" href="javascript:;">
+        Choose Folder
+    </a>
 </section>

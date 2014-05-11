@@ -1,14 +1,20 @@
-<nav data-bind="css: { disabled: ! shareDir }">
+<nav data-bind="css: { disabled: ! shareDir }" class="clearfix">
     <a href="javascript:;" class="blue button">Send File</a>
     <div class="icons">
-        <a href="javascript:;">
-            <i class="fa fa-folder"></i>
+        <a href="javascript:;" data-bind="css: { active: navPage == 'files' }"
+            title="Your Files">
+            <i class="fa fa-square arrow"></i>
+            <i class="fa fa-folder icon"></i>
         </a>
-        <a href="javascript:;">
-            <i class="fa fa-share"></i>
+        <a href="javascript:;" data-bind="css: { active: navPage == 'sent' }"
+            title="Sent Files">
+            <i class="fa fa-square arrow"></i>
+            <i class="fa fa-share icon"></i>
         </a>
-        <a href="javascript:;">
-            <i class="fa fa-gear"></i>
+        <a href="javascript:;" data-bind="css: { active: navPage == 'settings' }"
+            title="Settings">
+            <i class="fa fa-square arrow"></i>
+            <i class="fa fa-gear icon"></i>
         </a>
     </div>
     <div class="overlay"></div>

@@ -15,7 +15,14 @@ var ModelView = require( '../library/modelview.js' )(
 
 // set up the model data
 ModelView.data = {
-    shareDir: null
+    // shared folder setting
+    shareDir: null,
+    // activate nav page
+    navPage: 'settings',
+    // form submit
+    save: function ( form ) {
+        console.log( form );
+    }
 };
 
 // library

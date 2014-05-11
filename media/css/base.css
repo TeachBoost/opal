@@ -87,3 +87,8 @@ a:hover {
     padding-left: 140px; }
 .error-screen .message {
     font-size: 2em; padding: 0 0 20px; }
+
+/* Tooltips */
+.tip {
+    border-left: 4px solid #d6a70e !important;
+    background: #ffd35b; padding: 0.75em; }

@@ -5,4 +5,5 @@
 section.page {
     background: #eee; padding: 12px;
     position: fixed; top: 3em; bottom: 0;
-    right: 0; left: 0; box-sizing: border-box; }
+    right: 0; left: 0; box-sizing: border-box;
+    border-top: 3px solid #359fa3; }
