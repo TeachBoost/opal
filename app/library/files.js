@@ -6,7 +6,8 @@
  */
 
 // dependencies
-var app
+var win
+  , gui
   , fs = require( 'fs' )
   , _ = require( 'underscore' )
   , Util = require( './util.js' );
@@ -15,6 +16,7 @@ var app
 var Files = {
     // constants
     ERR_CONFIG_WRITE: "The config file could not be saved.",
+    CHECKING_ACCESS: "Checking directory access",
 
     // shared directory path
     shareDir: null,
@@ -25,7 +27,7 @@ var Files = {
     // load the configuration file. return false if we can't
     // read or write to it.
     loadConfig: function () {
-        var configPath = app.dataPath;
+        var configPath = gui.App.dataPath;
         // check if the file exists
         if ( ! fs.existsSync( configPath + '/config' ) ) {
             return false;
@@ -60,9 +62,29 @@ var Files = {
             && this.shareDir.length;
     },
 
+    // sets the shared directory. this tests if the directory
+    // exists and is writable. it will set the working screen
+    // while it works and trigger a callback on success.
+    setShareDir: function ( shareDir, callback ) {
+        // set the app to working-mode
+        win.emit( 'message.working', this.CHECKING_ACCESS )
+
+        // check if directory exists
+        if ( ! fs.existsSync( shareDir ) ) {
+            win.emit( 'message.working.close' );
+            return false;
+        }
+
+        // check if directory is writable
+
+        // trigger callback
+        win.emit( 'message.working.close' );
+        callback();
+    },
+
     // writes the config data to the config file
     writeConfig: function () {
-        var configPath = app.dataPath;
+        var configPath = gui.App.dataPath;
         // build the config object
         var config = {
             shareDir: this.shareDir,
@@ -80,7 +102,8 @@ var Files = {
 };
 
 // return
-module.exports = function ( _app ) {
-    app = _app;
+module.exports = function ( _win, _gui ) {
+    win = _win;
+    gui = _gui;
     return Files;
 }

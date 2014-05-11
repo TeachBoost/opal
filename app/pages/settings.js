@@ -20,9 +20,20 @@ ModelView.data = {
     shareDir: ko.observable( null ),
     // activate nav page
     navPage: 'settings',
-    // form submit
-    save: function ( form ) {
-        console.log( form );
+    // open the file dialog
+    openDialog: function () {
+        var $dialog = document.getElementById( 'shareDirFileInput' );
+        $dialog.click();
+    },
+    // when the file dialog is changed
+    changeDir: function () {
+        var $dialog = document.getElementById( 'shareDirFileInput' )
+          , value = $dialog.value
+          , self = this;
+        // set the value to the Files library. if the callback
+        // is triggered we'll update the shareDir
+        
+        this.shareDir( value );
     }
 };
 

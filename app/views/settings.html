@@ -11,9 +11,10 @@
     <div class="margin-bottom-15">
         <input type="text" data-bind="value: shareDir" class="w100p" disabled />
         <input type="file" name="shareDir" webkitdirectory directory
-            style="display: none;" />
+            style="display: none;" id="shareDirFileInput"
+            data-bind="event: { change: changeDir }" />
     </div>
-    <a class="gray button" href="javascript:;">
+    <a class="gray button" href="javascript:;" data-bind="click: openDialog">
         Choose Folder
     </a>
 </section>
