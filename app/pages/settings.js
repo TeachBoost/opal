@@ -4,7 +4,8 @@
 
 // dependencies
 var win
-  , Files = require( '../library/files.js' );
+  , Files = require( '../library/files.js' )
+  , ko = require( 'knockout' );
 
 // get the model-view
 var ModelView = require( '../library/modelview.js' )(
@@ -16,7 +17,7 @@ var ModelView = require( '../library/modelview.js' )(
 // set up the model data
 ModelView.data = {
     // shared folder setting
-    shareDir: null,
+    shareDir: ko.observable( null ),
     // activate nav page
     navPage: 'settings',
     // form submit
@@ -29,7 +30,7 @@ ModelView.data = {
 var SettingsPage = function () {
     // render the error page
     win.on( 'settings.show', function () {
-        ModelView.data.shareDir = Files.shareDir;
+        ModelView.data.shareDir( Files.shareDir );
         ModelView.render();
         ModelView.activate();
     });

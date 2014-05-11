@@ -2,13 +2,13 @@
 
 <section class="page">
     <h3 class="margin-bottom-20">Settings</h3>
-    <div data-bind="visible: ! shareDir" class="tip margin-bottom-20 round-3">
+    <div data-bind="visible: ! shareDir()" class="tip margin-bottom-20 round-3">
         <span>Before you begin, please set the location of your shared directory.</span>
     </div>
-    <div data-bind="visible: shareDir" class="margin-bottom-10">
+    <div data-bind="visible: shareDir()" class="margin-bottom-10">
         <label>Shared Folder:</label>
     </div>
-    <div class="margin-bottom-10">
+    <div class="margin-bottom-15">
         <input type="text" data-bind="value: shareDir" class="w100p" disabled />
         <input type="file" name="shareDir" webkitdirectory directory
             style="display: none;" />

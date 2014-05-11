@@ -35,7 +35,7 @@ nav .icons a:nth-child(2) {
 /* Icons within the buttons */
 nav .icons a i.icon {
     font-size: 2em; position: relative;
-    top: 0.25em; color: #484848; }
+    top: 0.25em; color: #999; }
 nav .icons a i.arrow {
     display: none; position: absolute;
     bottom: -0.5em; left: 50%;
