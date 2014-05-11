@@ -1,16 +1,23 @@
 {
   "name": "Opal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "index.html",
   "description": "Secure file sharing using Keybase",
   "window": {
     "toolbar": false,
-    "width": 800,
-    "height": 600
+    "width": 640,
+    "height": 400,
+    "min_width": 400,
+    "min_height": 300,
+    "show": false,
+    "position": "center"
   },
   "dependencies": {
-    "ractive": "*",
-    "ractify": "*"
+    "knockout": "*",
+    "mustache": "*",
+    "exec": "*",
+    "underscore": "*",
+    "font-awesome": "*"
   },
   "devDependencies": {
     "node-webkit-builder": "0.0.2"

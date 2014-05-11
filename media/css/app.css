@@ -1,0 +1,12 @@
+/**
+ * Import all application css
+ */
+
+@import url( 'base.css' );
+@import url( 'forms.css' );
+@import url( 'helpers.css' );
+@import url( 'buttons.css' );
+@import url( 'tables.css' );
+@import url( 'nav.css' );
+
+@import url( 'font-awesome.css' );

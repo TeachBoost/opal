@@ -1,0 +1,12 @@
+/**
+ * Nav
+ */
+
+nav {
+    background: #ccc; padding: 12px 8px 14px;
+    box-sizing: border-box; width: 100%; }
+nav .icons {
+    float: right; }
+nav .icons a {
+    font-size: 1.75em; display: inline-block;
+    margin-left: 15px; }
