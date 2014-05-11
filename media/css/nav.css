@@ -3,10 +3,20 @@
  */
 
 nav {
-    background: #ccc; padding: 12px 8px 14px;
-    box-sizing: border-box; width: 100%; }
+    background: #ccc; padding: 0 0.5em;
+    box-sizing: border-box; width: 100%;
+    position: relative; z-index: 1;
+    height: 3em; line-height: 2.75em; }
+nav .overlay {
+    position: absolute; top: 0; right: 0;
+    left: 0; bottom: 0; z-index: 2;
+    background: rgba( 204, 204, 204, 0.7 );
+    display: none; }
+nav.disabled .overlay {
+    display: block; }
 nav .icons {
     float: right; }
 nav .icons a {
     font-size: 1.75em; display: inline-block;
-    margin-left: 15px; }
+    margin-left: 15px; top: 0.25em;
+    line-height: 0; position: relative; }

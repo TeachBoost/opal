@@ -1,3 +1,11 @@
 {{> nav }}
 
-<h3>Settings</h3>
+<section class="page">
+    <h3>Settings</h3>
+    <div data-bind="visible: ! shareDir">
+        Before you begin, please set the location of your shared directory.
+    </div>
+    <form>
+        <input type="text" name="path" />
+    </form>
+</section>

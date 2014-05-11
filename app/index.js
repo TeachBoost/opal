@@ -11,7 +11,14 @@ var APP_PATH = './app';
 // get the window object and dependencies
 var gui = require( 'nw.gui' )
   , win = gui.Window.get()
+  , app = gui.App
   , _ = require( 'underscore' );
+
+// load the app modules
+var Util = require( APP_PATH + '/library/util.js' )
+  , Crypto = require( APP_PATH + '/library/crypto.js' )( win )
+  , Files = require( APP_PATH + '/library/files.js' )( app )
+  , Menu = require( APP_PATH + '/library/menu.js' )( win, gui );
 
 // load the pages
 // each page has a window dependency that it attaches
@@ -20,17 +27,14 @@ var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
   , FilesPage = require( APP_PATH + '/pages/files.js' )( win )
   , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win );
 
-// load the app modules
-var Util = require( APP_PATH + '/library/util.js' )
-  , Crypto = require( APP_PATH + '/library/crypto.js' )( win )
-  , Files = require( APP_PATH + '/library/files.js' )
-  , Menu = require( APP_PATH + '/library/menu.js' )( win, gui );
-
 // attach the menubar
 win.menu = Menu.menubar();
 
 // expose the document globally
 global.document = window.document;
+
+// load the config file async
+Files.loadConfig();
 
 // listen for load events
 // all flags need to be raised before the app is run
@@ -46,7 +50,8 @@ win.on( 'app.load', function ( flag, status ) {
     if ( nonNull.length < _.values( flags ).length )
         return;
     // all flags raised, run app
-    run();
+    var err = _.without( _.values( flags ), true ).length;
+    run( err );
 });
 
 // crypto library emits events since exec calls are
@@ -55,21 +60,21 @@ Crypto.enabled();
 Crypto.friends();
 
 // run the app
-var run = function () {
+var run = _.once( function ( err ) {
     // if there are any false flags, show the error page
-    if ( _.without( _.values( flags ), true ).length ) {
+    if ( err ) {
         win.emit( 'error.show', Util.getError() );
     }
     // if there's any problems with the config, show the
     // settings page
-    else if ( ! Files.loadConfig() ) {
+    else if ( ! Files.hasShareDir() ) {
         win.emit( 'settings.show' );
     }
     // no issues, show the files page
     else {
         win.emit( 'files.show' );
     }
-};
+});
 
 // show the window
 win.show();
