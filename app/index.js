@@ -17,7 +17,7 @@ var gui = require( 'nw.gui' )
 var Util = require( APP_PATH + '/library/util.js' )
   , Crypto = require( APP_PATH + '/library/crypto.js' )( win )
   , Files = require( APP_PATH + '/library/files.js' )( win, gui )
-  , Menu = require( APP_PATH + '/library/menu.js' )( win, gui ),
+  , Menu = require( APP_PATH + '/library/menu.js' )( win, gui )
   , Message = require( APP_PATH + '/library/message.js' )( win );
 
 // load the pages

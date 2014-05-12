@@ -32,8 +32,8 @@ ModelView.data = {
           , self = this;
         // set the value to the Files library. if the callback
         // is triggered we'll update the shareDir
-        
-        this.shareDir( value );
+
+        //this.shareDir( value );
     }
 };
 

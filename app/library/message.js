@@ -8,26 +8,27 @@
 // dependencies
 var win;
 
-// window events
-win.on( 'message.working', function ( message ) {
-    Message.updateWorking( message )
-});
-
-win.on( 'message.working.close', function () {
-    Message.closeWorking();
-});
-
 // library
-var Message = {
-    // show the working/status message
-    updateWorking: function ( message ) {
+var Message = function () {
+    var self = this;
+    // window events
+    win.on( 'message.working', function ( message ) {
+        self.updateWorking( message )
+    });
 
-    },
+    win.on( 'message.working.close', function () {
+        self.closeWorking();
+    });
+
+    // show the working/status message
+    this.updateWorking = function ( message ) {
+
+    };
 
     // close the working/status message
-    closeWorking: function () {
+    this.closeWorking = function () {
 
-    }
+    };
 };
 
 // return
