@@ -28,7 +28,9 @@ var Crypto = {
         // run `keybase version` to see if the program is there
         Util.updateLoading( this.LOAD_ENABLED );
         exec( 'keybase version', function ( err, out, code ) {
-            if ( err || ! out.length ) {
+            if ( ! out.length ) {
+                // sometimes err can contain gpg warnings, just
+                // ignore it for now
                 Util.setError( self.ERR_NOT_ENABLED );
                 win.emit( 'app.load', 'crypto.enabled', false );
             }
