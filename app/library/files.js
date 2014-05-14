@@ -66,6 +66,7 @@ var Files = {
     // exists and is writable. it will set the working screen
     // while it works and trigger a callback on success.
     setShareDir: function ( shareDir, callback ) {
+        var self = this;
         // set the app to working-mode
         win.emit( 'message.working', this.CHECKING_ACCESS )
 
@@ -79,7 +80,11 @@ var Files = {
         fs.readdir( shareDir, function ( err, files ) {
             win.emit( 'message.working.close' );
             // trigger callback on success
-            if ( ! err ) callback();
+            if ( ! err ) {
+                self.shareDir = shareDir;
+                self.writeConfig();
+                callback();
+            }
         });
     },
 
@@ -93,7 +98,7 @@ var Files = {
         // write the file
         fs.writeFile(
             configPath + '/config',
-            JSON.stringify( settings, null, 4 ),
+            JSON.stringify( config, null, 4 ),
             function ( err ) {
                 if ( err ) {
                     Util.setError( self.ERR_CONFIG_WRITE );
