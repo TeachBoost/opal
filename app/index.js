@@ -25,7 +25,7 @@ var Util = require( APP_PATH + '/library/util.js' )
 // events to.
 var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
   , FilesPage = require( APP_PATH + '/pages/files.js' )( win )
-  , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win );
+  , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files );
 
 // attach the menubar
 win.menu = Menu.menubar();

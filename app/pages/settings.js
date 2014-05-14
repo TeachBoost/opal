@@ -4,7 +4,7 @@
 
 // dependencies
 var win
-  , Files = require( '../library/files.js' )
+  , Files
   , ko = require( 'knockout' );
 
 // get the model-view
@@ -28,12 +28,13 @@ ModelView.data = {
     // when the file dialog is changed
     changeDir: function () {
         var $dialog = document.getElementById( 'shareDirFileInput' )
-          , value = $dialog.value
+          , dirPath = $dialog.value
           , self = this;
         // set the value to the Files library. if the callback
         // is triggered we'll update the shareDir
-
-        //this.shareDir( value );
+        Files.setShareDir( dirPath, function () {
+            self.shareDir( dirPath );
+        });
     }
 };
 
@@ -48,7 +49,8 @@ var SettingsPage = function () {
 };
 
 // return
-module.exports = function ( _win ) {
+module.exports = function ( _win, _Files ) {
     win = _win;
+    Files = _Files;
     return SettingsPage();
 };

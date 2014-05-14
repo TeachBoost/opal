@@ -76,10 +76,11 @@ var Files = {
         }
 
         // check if directory is writable
-
-        // trigger callback
-        win.emit( 'message.working.close' );
-        callback();
+        fs.readdir( shareDir, function ( err, files ) {
+            win.emit( 'message.working.close' );
+            // trigger callback on success
+            if ( ! err ) callback();
+        });
     },
 
     // writes the config data to the config file
