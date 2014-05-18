@@ -4,3 +4,4 @@ cache/
 build/
 nw-packaged-app/
 .DS_Store
+npm-debug.log

@@ -1,6 +1,11 @@
 <nav data-bind="css: { disabled: ! shareDir() }" class="clearfix">
     <a href="javascript:;" class="blue button">Send File</a>
     <div class="icons">
+        <a href="javascript:;" data-bind="css: { active: navPage == 'admin' }"
+            title="Admin">
+            <i class="fa fa-square arrow"></i>
+            <i class="fa fa-admin icon"></i>
+        </a>
         <a href="javascript:;" data-bind="css: { active: navPage == 'files' }"
             title="Your Files">
             <i class="fa fa-square arrow"></i>
@@ -9,7 +14,7 @@
         <a href="javascript:;" data-bind="css: { active: navPage == 'sent' }"
             title="Sent Files">
             <i class="fa fa-square arrow"></i>
-            <i class="fa fa-share icon"></i>
+            <i class="fa fa-send icon"></i>
         </a>
         <a href="javascript:;" data-bind="css: { active: navPage == 'settings' }"
             title="Settings">
