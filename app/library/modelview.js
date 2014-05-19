@@ -50,16 +50,19 @@ var ModelView = function () {
 
     // activates the knockout view-model
     this.activate = function () {
-        ko.applyBindings( this.data );
+        var $root = document.getElementById( 'root' );
+        ko.applyBindings( this.data, $root );
     };
 
     // renders the views and partials to the DOM
     this.render = function ( body ) {
+        var $root = document.getElementById( 'root' );
+        ko.cleanNode( $root );
         var template = Mustache.render(
             this.view,
             {},
             this.partials );
-        document.getElementById( 'root' ).innerHTML = template;
+        $root.innerHTML = template;
     };
 };
 

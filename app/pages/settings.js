@@ -20,6 +20,10 @@ ModelView.data = {
     shareDir: ko.observable( null ),
     // activate nav page
     navPage: 'settings',
+    // whether the nav is disabled
+    navDisabled: function () {
+        return ! this.shareDir();
+    },
     // open the file dialog
     openDialog: function () {
         var $dialog = document.getElementById( 'shareDirFileInput' );
@@ -35,6 +39,10 @@ ModelView.data = {
         Files.setShareDir( dirPath, function () {
             self.shareDir( dirPath );
         });
+    },
+    // change page event
+    navClick: function ( page ) {
+        win.emit( page + '.show' );
     }
 };
 

@@ -28,18 +28,20 @@ nav .icons a {
     line-height: 100%; position: absolute;
     width: 2em; }
 nav .icons a:nth-child(1) {
-    right: 6.5em; }
+    right: 9.5em; }
 nav .icons a:nth-child(2) {
+    right: 6.5em; }
+nav .icons a:nth-child(3) {
     right: 3.5em; }
 
 /* Icons within the buttons */
 nav .icons a i.icon {
-    font-size: 2em; position: relative;
-    top: 0.25em; color: #999; }
+    font-size: 1.8em; position: relative;
+    top: 0.36em; color: #999; }
 nav .icons a i.arrow {
     display: none; position: absolute;
     bottom: -0.5em; left: 50%;
-    margin-left: -0.5em; width: 1em;
+    margin-left: -0.6em; width: 1em;
     -webkit-transform: rotate(-45deg);
     color: #359fa3; z-index: 3; }
 
@@ -47,6 +49,6 @@ nav .icons a i.arrow {
 nav .icons a.active {
     z-index: 3; }
 nav .icons a.active i.icon {
-    top: 0.1em !important; color: #359fa3; }
+    top: 0.2em !important; color: #359fa3; }
 nav .icons a.active i.arrow {
     display: block; }

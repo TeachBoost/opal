@@ -72,7 +72,8 @@ var run = _.once( function ( err ) {
     }
     // no issues, show the files page
     else {
-        win.emit( 'files.show' );
+        //win.emit( 'files.show' );
+        win.emit( 'settings.show' );
     }
 });
 
