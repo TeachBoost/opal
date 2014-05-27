@@ -24,6 +24,7 @@ var Util = require( APP_PATH + '/library/util.js' )
 // each page has a window dependency that it attaches
 // events to.
 var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
+  , AdminPage = require( APP_PATH + '/pages/admin.js' )( win )
   , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files )
   , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files );
 
