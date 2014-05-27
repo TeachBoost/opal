@@ -4,8 +4,7 @@
 
 // dependencies
 var win
-  , Files
-  , ko = require( 'knockout' );
+  , Files;
 
 // get the model-view
 var ModelView = require( '../library/modelview.js' )(
@@ -17,13 +16,17 @@ var ModelView = require( '../library/modelview.js' )(
 // set up the model data
 ModelView.data = {
     // shared folder setting
-    shareDir: ko.observable( null ),
+    shareDir: null,
     // activate nav page
     navPage: 'settings',
     // whether the nav is disabled
-    navDisabled: function () {
-        return ! this.shareDir();
-    },
+    navEnabled: function () {
+        return this.shareDir.length > 0;
+    }
+};
+
+// set up the model events
+ModelView.events = {
     // open the file dialog
     openDialog: function () {
         var $dialog = document.getElementById( 'shareDirFileInput' );
@@ -41,18 +44,19 @@ ModelView.data = {
         });
     },
     // change page event
-    navClick: function ( page ) {
-        win.emit( page + '.show' );
+    navClick: function ( event, page ) {
+        if ( page !== this.navPage ) {
+            win.emit( page + '.show' );
+        }
     }
-};
+}
 
 // library
 var SettingsPage = function () {
     // render the error page
     win.on( 'settings.show', function () {
-        ModelView.data.shareDir( Files.shareDir );
+        ModelView.data.shareDir = Files.shareDir;
         ModelView.render();
-        ModelView.activate();
     });
 };
 

@@ -4,6 +4,7 @@
 
 // dependencies
 var win;
+
 // include libraries
 var ModelView = require( '../library/modelview.js' )(
     './app/views/error.html',
@@ -22,7 +23,6 @@ var ErrorPage = function () {
     win.on( 'error.show', function ( message ) {
         ModelView.data.message = message;
         ModelView.render();
-        ModelView.activate();
     });
 };
 

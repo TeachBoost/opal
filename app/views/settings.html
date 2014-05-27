@@ -2,19 +2,23 @@
 
 <section class="page">
     <h3 class="margin-bottom-20">Settings</h3>
-    <div data-bind="visible: ! shareDir()" class="tip margin-bottom-20 round-3">
+    {{^ shareDir }}
+    <div class="tip margin-bottom-20 round-3">
         <span>Before you begin, please set the location of your shared directory.</span>
     </div>
-    <div data-bind="visible: shareDir()" class="margin-bottom-10">
+    {{/ shareDir }}
+    {{# shareDir }}
+    <div class="margin-bottom-10">
         <label>Shared Folder:</label>
     </div>
+    {{/ shareDir }}
     <div class="margin-bottom-15">
-        <input type="text" data-bind="value: shareDir" class="w100p" disabled />
+        <input type="text" value="{{shareDir}}" class="w100p" disabled />
         <input type="file" name="shareDir" webkitdirectory directory
             style="display: none;" id="shareDirFileInput"
-            data-bind="event: { change: changeDir }" />
+            on-change="changeDir" />
     </div>
-    <a class="gray button" href="javascript:;" data-bind="click: openDialog">
+    <a class="gray button" href="javascript:;" on-click="openDialog">
         Choose Folder
     </a>
 </section>

@@ -48,8 +48,10 @@ var Crypto = {
         // tracking anyone. save the tracked users in friends[]
         win.emit( 'message.status', this.LOAD_FRIENDS, 'crypto_friends' );
         // @TEMPORARY
-        //win.emit( 'app.load', 'crypto.friends', true );
-        //return;
+        win.emit( 'app.load', 'crypto.friends', true );
+        win.emit( 'message.status.remove', 'crypto_friends' );
+        return;
+        // END @TEMPORARY
         exec( 'keybase list-tracking', function ( err, out, code ) {
             // remove status message
             win.emit( 'message.status.remove', 'crypto_friends' );

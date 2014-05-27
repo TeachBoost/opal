@@ -22,17 +22,19 @@ var ModelView = require( '../library/modelview.js' )(
 ModelView.data = {
     // activate nav page
     navPage: 'files',
-    navDisabled: function () {
-        return false;
-    },
-    // change page event
-    navClick: function ( page ) {
-        win.emit( page + '.show' );
-    },
+    // whether or not the nav is enabled
+    navEnabled: true,
     // container for files sent to this user
-    files: ko.observable( [] ),
-    hasFiles: function () {
-        return this.files.length > 0;
+    files: []
+};
+
+// set up the model events
+ModelView.events = {
+    // change page event
+    navClick: function ( event, page ) {
+        if ( page !== this.navPage ) {
+            win.emit( page + '.show' );
+        }
     }
 };
 
@@ -45,13 +47,12 @@ var FilesPage = function () {
         self.syncFiles();
         // render the page
         ModelView.render();
-        ModelView.activate();
     });
 
     // sync the received files from the Files library with the
     // locally stored copy in the model-view data
     this.syncFiles = function () {
-        ModelView.data.files( Files.getReceivedFiles() ); 
+        ModelView.data.files = Files.getReceivedFiles();
     };
 };
 

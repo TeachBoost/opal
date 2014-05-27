@@ -8,17 +8,19 @@
 // dependencies
 // file system interaction
 var fs = require( 'fs' )
-  , ko = require( 'knockout' )
-  , Mustache = require( 'mustache' );
+  , Ractive = require( 'ractive' )
+  , _ = require( 'underscore' );
 
 // define the base model
 var ModelView = function () {
     // raw view file contents; lazy-loaded
     this.view = null;
-    // the View-Model object passed to knockout
-    this.data = {};
     // partial view file contents
     this.partials = {};
+    // the View-Model object passed to knockout
+    this.data = {};
+    // events to bind
+    this.events = {};
 
     // load a view file off the filesystem
     this.loadView = function ( path ) {
@@ -48,21 +50,21 @@ var ModelView = function () {
         }
     };
 
-    // activates the knockout view-model
-    this.activate = function () {
-        var $root = document.getElementById( 'root' );
-        ko.applyBindings( this.data, $root );
-    };
-
     // renders the views and partials to the DOM
     this.render = function ( body ) {
+        // get the root element
         var $root = document.getElementById( 'root' );
-        ko.cleanNode( $root );
-        var template = Mustache.render(
-            this.view,
-            {},
-            this.partials );
-        $root.innerHTML = template;
+        // render the ractive view
+        var ractive = new Ractive({
+            el: $root,
+            template: this.view,
+            partials: this.partials,
+            data: this.data
+        });
+        // attach the events
+        for ( var i in this.events ) {
+            ractive.on( i, this.events[ i ] );
+        }
     };
 };
 

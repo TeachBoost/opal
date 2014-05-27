@@ -1,38 +1,30 @@
-<nav data-bind="css: { disabled: navDisabled() }" class="clearfix">
-    <a href="javascript:;" class="blue button">Send File</a>
+<nav class="clearfix {{ navEnabled ? '' : 'disabled' }}">
+    <a href="javascript:;" on-click="navClick:send" class="blue button">Send File</a>
     <div class="icons">
-        <a href="javascript:;" data-bind="
-                css: {
-                    active: navPage == 'admin' },
-                click: navClick.bind( $data, 'admin' )"
-            data-page="admin"
+        <a href="javascript:;"
+            class="{{# navPage == 'admin' }}active{{/ navPage }}"
+            on-click="navClick:admin"
             title="Admin">
             <i class="fa fa-square arrow"></i>
             <i class="fa fa-flask icon"></i>
         </a>
-        <a href="javascript:;" data-bind="
-                css: {
-                    active: navPage == 'files' },
-                click: navClick.bind( $data, 'files' )"
-            data-page="files"
+        <a href="javascript:;"
+            class="{{# navPage == 'files' }}active{{/ navPage }}"
+            on-click="navClick:files"
             title="Your Files">
             <i class="fa fa-square arrow"></i>
             <i class="fa fa-folder icon"></i>
         </a>
-        <a href="javascript:;" data-bind="
-                css: {
-                    active: navPage == 'sent' },
-                click: navClick.bind( $data, 'sent' )"
-            data-page="sent"
+        <a href="javascript:;"
+            class="{{# navPage == 'sent' }}active{{/ navPage }}"
+            on-click="navClick:sent"
             title="Sent Files">
             <i class="fa fa-square arrow"></i>
             <i class="fa fa-send icon"></i>
         </a>
-        <a href="javascript:;" data-bind="
-                css: {
-                    active: navPage == 'settings' },
-                click: navClick.bind( $data, 'settings' )"
-            data-page="settings"
+        <a href="javascript:;"
+            class="{{# navPage == 'settings' }}active{{/ navPage }}"
+            on-click="navClick:settings"
             title="Settings">
             <i class="fa fa-square arrow"></i>
             <i class="fa fa-gear icon"></i>

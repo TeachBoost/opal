@@ -116,7 +116,67 @@ var Files = {
     // this will re-scan the user's shared directory looking
     // for any files that were sent to the user.
     getReceivedFiles: function () {
-        return [];
+        return [{
+            name: "Mike's Crazy File",
+            size: "450 bytes",
+            date: "4 Jan"
+        }, {
+            name: "Mike's Crazy File",
+            size: "567 kB",
+            date: "10 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "124 kB",
+            date: "22 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "4 kB",
+            date: "1 Apr"
+        }, {
+            name: "Mike's Crazy File",
+            size: "42 MB",
+            date: "10:15am"
+        }, {
+            name: "Mike's Crazy File",
+            size: "450 bytes",
+            date: "4 Jan"
+        }, {
+            name: "Mike's Crazy File",
+            size: "567 kB",
+            date: "10 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "124 kB",
+            date: "22 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "4 kB",
+            date: "1 Apr"
+        }, {
+            name: "Mike's Crazy File",
+            size: "42 MB",
+            date: "10:15am"
+        }, {
+            name: "Mike's Crazy File",
+            size: "450 bytes",
+            date: "4 Jan"
+        }, {
+            name: "Mike's Crazy File",
+            size: "567 kB",
+            date: "10 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "124 kB",
+            date: "22 Mar"
+        }, {
+            name: "Mike's Crazy File",
+            size: "4 kB",
+            date: "1 Apr"
+        }, {
+            name: "Mike's Crazy File",
+            size: "42 MB",
+            date: "10:15am"
+        }];
     }
 };
 

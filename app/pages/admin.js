@@ -3,8 +3,7 @@
  */
 
 // dependencies
-var win
-  , ko = require( 'knockout' );
+var win;
 
 // get the model-view
 var ModelView = require( '../library/modelview.js' )(
@@ -18,25 +17,28 @@ ModelView.data = {
     // activate nav page
     navPage: 'admin',
     // whether the nav is disabled
-    navDisabled: function () {
-        return false;
-    },
+    navEnabled: true
+};
+
+// set up the model events
+ModelView.events = {
     // change page event
-    navClick: function ( page ) {
-        win.emit( page + '.show' );
+    navClick: function ( event, page ) {
+        if ( page !== this.navPage ) {
+            win.emit( page + '.show' );
+        }
     },
     // open the dev tools
     openDevTools: function () {
         win.showDevTools();
     }
-};
+}
 
 // library
 var AdminPage = function () {
     // render the error page
     win.on( 'admin.show', function () {
         ModelView.render();
-        ModelView.activate();
     });
 };
 
