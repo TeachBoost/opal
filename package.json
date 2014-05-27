@@ -8,8 +8,8 @@
     "toolbar": false,
     "width": 640,
     "height": 400,
-    "min_width": 400,
-    "min_height": 300,
+    "min_width": 420,
+    "min_height": 360,
     "show": false,
     "position": "center"
   },

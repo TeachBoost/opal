@@ -2,7 +2,7 @@
 
 <section class="full page">
     <h3 class="margin-bottom-20">Files</h3>
-    <table>
+    <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th class="w50p">Name</th>
@@ -11,8 +11,24 @@
                 <th class="w10p"></th>
             </tr>
         </thead>
-        <tbody>
-
+        <!-- ko if: hasFiles() -->
+        <tbody data-bind="foreach: { data: files, as: 'file' }">
+            <tr>
+                <td data-bind="text: file.name"></td>
+                <td data-bind="text: file.size"></td>
+                <td data-bind="text: file.date"></td>
+                <td>
+                    <i class="fa fa-trashcan"></i>
+                </td>
+            </tr>
         </tbody>
+        <!-- /ko -->
+        <!-- ko ifnot: hasFiles() -->
+        <tbody data-bind="visible: ! hasFiles()">
+            <tr>
+                <td colspan="4" class="centered-text color-999">You haven't received any files :)</td>
+            </tr>
+        </tbody>
+        <!-- /ko -->
     </table>
 </section>

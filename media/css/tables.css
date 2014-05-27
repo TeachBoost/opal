@@ -5,17 +5,17 @@
 table {
     width: 100%; }
 table th {
-    padding: 0.5em 0.66em; border: none; background: #e9e9e9;
-    border-left: 1px solid #ddd; border-top: 1px solid #ddd;
-    text-align: left; color: #777; }
+    padding: 0.625em 0.859em; border: none; background: #ddd;
+    border-left: 1px solid #ccc; border-top: 1px solid #ccc;
+    text-align: left; color: #777; font-size: 0.8em; }
 table tr th:last-child {
-    border-right: 1px solid #ddd; }
+    border-right: 1px solid #ccc; }
 table td {
     padding: 0.5em 0.66em; border: none; color: #333;
-    border-left: 1px solid #eee; border-bottom: 1px solid #eee; }
+    border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; }
 table tr td:last-child {
-    border-right: 1px solid #ddd; }
+    border-right: 1px solid #ccc; }
 table tr td:first-child {
-    border-left: 1px solid #ddd; }
+    border-left: 1px solid #ccc; }
 table tr:last-child td {
-    border-bottom-color: #ddd; }
+    border-bottom-color: #ccc; }

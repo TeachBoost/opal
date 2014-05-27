@@ -28,7 +28,7 @@ var Files = {
     sentFiles: [],
 
     // array of received files, loaded from shared directory
-    rcvdFiles: [],
+    receivedFiles: [],
 
     // load the configuration file. return false if we can't
     // read or write to it.
@@ -116,7 +116,7 @@ var Files = {
     // this will re-scan the user's shared directory looking
     // for any files that were sent to the user.
     getReceivedFiles: function () {
-        
+        return [];
     }
 };
 

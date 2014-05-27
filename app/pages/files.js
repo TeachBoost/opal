@@ -30,7 +30,10 @@ ModelView.data = {
         win.emit( page + '.show' );
     },
     // container for files sent to this user
-    files: ko.observable( null )
+    files: ko.observable( [] ),
+    hasFiles: function () {
+        return this.files.length > 0;
+    }
 };
 
 // library
