@@ -10,14 +10,20 @@
 @media only screen and (min-width : 720px) and (max-width : 960px) {
     body {
         font-size: 18px; }
+    section.full.page table {
+        top: 3.5em; }
 }
 
 @media only screen and (min-width : 960px) and (max-width : 1400px) {
     body {
         font-size: 20px; }
+    section.full.page table {
+        top: 3.75em; }
 }
 
 @media only screen and (min-width : 1400px) {
     body {
         font-size: 22px; }
+    section.full.page table {
+        top: 4em; }
 }

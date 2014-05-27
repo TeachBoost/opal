@@ -24,6 +24,12 @@ var Files = {
     // array of friends
     friends: [],
 
+    // array of sent files, loaded from shared directory
+    sentFiles: [],
+
+    // array of received files, loaded from shared directory
+    rcvdFiles: [],
+
     // load the configuration file. return false if we can't
     // read or write to it.
     loadConfig: function () {
@@ -104,6 +110,13 @@ var Files = {
                     Util.setError( self.ERR_CONFIG_WRITE );
                 }
             });
+    },
+
+    // load the received files into the local "files" array
+    // this will re-scan the user's shared directory looking
+    // for any files that were sent to the user.
+    getReceivedFiles: function () {
+        
     }
 };
 

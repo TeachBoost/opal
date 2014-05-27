@@ -24,7 +24,7 @@ var Util = require( APP_PATH + '/library/util.js' )
 // each page has a window dependency that it attaches
 // events to.
 var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
-  , FilesPage = require( APP_PATH + '/pages/files.js' )( win )
+  , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files )
   , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files );
 
 // attach the menubar
@@ -61,7 +61,6 @@ Crypto.friends();
 
 // run the app
 var run = _.once( function ( err ) {
-    win.emit( 'message.status.clear' );
     // if there are any false flags, show the error page
     if ( err ) {
         win.emit( 'error.show', Util.getError() );

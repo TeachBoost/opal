@@ -26,8 +26,9 @@ var Crypto = {
     enabled: function () {
         var self = this;
         // run `keybase version` to see if the program is there
-        win.emit( 'message.status', this.LOAD_ENABLED );
+        win.emit( 'message.status', this.LOAD_ENABLED, 'crypto_enabled' );
         exec( 'keybase version', function ( err, out, code ) {
+            win.emit( 'message.status.remove', 'crypto_enabled' );
             if ( ! out.length ) {
                 // sometimes err can contain gpg warnings, just
                 // ignore it for now
@@ -45,11 +46,13 @@ var Crypto = {
         var self = this;
         // run `keybase list-tracking` to see if the user is
         // tracking anyone. save the tracked users in friends[]
-        win.emit( 'message.status', this.LOAD_FRIENDS );
+        win.emit( 'message.status', this.LOAD_FRIENDS, 'crypto_friends' );
         // @TEMPORARY
-        win.emit( 'app.load', 'crypto.friends', true );
-        return;
+        //win.emit( 'app.load', 'crypto.friends', true );
+        //return;
         exec( 'keybase list-tracking', function ( err, out, code ) {
+            // remove status message
+            win.emit( 'message.status.remove', 'crypto_friends' );
             if ( err || ! out.length ) {
                 Util.setError( self.ERR_NO_FRIENDS );
                 win.emit( 'app.load', 'crypto.friends', false );
