@@ -20,6 +20,14 @@ var Message = function () {
         self.closeWorking();
     });
 
+    win.on( 'message.status', function ( message ) {
+        self.updateStatus( message )
+    });
+
+    win.on( 'message.status.clear', function () {
+        self.clearStatus();
+    });
+
     // show the working/status message
     this.updateWorking = function ( message ) {
 
@@ -29,10 +37,24 @@ var Message = function () {
     this.closeWorking = function () {
 
     };
+
+    // update the loading message on the screen
+    this.updateStatus = function ( message ) {
+        // append HTML to the loading screen
+        var $loading = document.getElementById( 'status-messages' );
+        $loading.innerHTML = message + '&hellip;';
+        $loading.style.display = 'block';
+    };
+
+    this.clearStatus = function () {
+        var $loading = document.getElementById( 'status-messages' );
+        $loading.innerHTML = '';
+        $loading.style.display = 'none';
+    }
 };
 
 // return
 module.exports = function ( _win ) {
     win = _win;
-    return Message;
+    return Message();
 }

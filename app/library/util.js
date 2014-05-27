@@ -16,13 +16,6 @@ var Util = {
     // get the error message
     getError: function () {
         return this.errorMessage;
-    },
-
-    // update the loading message on the screen
-    updateLoading: function ( message ) {
-        // append HTML to the loading screen
-        var $loading = document.getElementById( 'loading-messages' );
-        $loading.innerHTML = message + '&hellip;';
     }
 };
 

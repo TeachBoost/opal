@@ -61,6 +61,7 @@ Crypto.friends();
 
 // run the app
 var run = _.once( function ( err ) {
+    win.emit( 'message.status.clear' );
     // if there are any false flags, show the error page
     if ( err ) {
         win.emit( 'error.show', Util.getError() );
@@ -72,8 +73,7 @@ var run = _.once( function ( err ) {
     }
     // no issues, show the files page
     else {
-        //win.emit( 'files.show' );
-        win.emit( 'settings.show' );
+        win.emit( 'files.show' );
     }
 });
 

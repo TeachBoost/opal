@@ -26,7 +26,7 @@ var Crypto = {
     enabled: function () {
         var self = this;
         // run `keybase version` to see if the program is there
-        Util.updateLoading( this.LOAD_ENABLED );
+        win.emit( 'message.status', this.LOAD_ENABLED );
         exec( 'keybase version', function ( err, out, code ) {
             if ( ! out.length ) {
                 // sometimes err can contain gpg warnings, just
@@ -45,7 +45,7 @@ var Crypto = {
         var self = this;
         // run `keybase list-tracking` to see if the user is
         // tracking anyone. save the tracked users in friends[]
-        Util.updateLoading( this.LOAD_FRIENDS );
+        win.emit( 'message.status', this.LOAD_FRIENDS );
         // @TEMPORARY
         win.emit( 'app.load', 'crypto.friends', true );
         return;

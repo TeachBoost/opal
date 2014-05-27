@@ -66,8 +66,6 @@ a:hover {
 .load-screen i {
     font-size: 4em; color: #aaa;
     text-shadow: 0 -1px 0 #888, 0 1px 0 #eee; }
-.load-screen .messages {
-    position: absolute; bottom: 10px; left: 10px; }
 
 /* error screen
  */
@@ -92,3 +90,9 @@ a:hover {
 .tip {
     border-left: 4px solid #d6a70e !important;
     background: #ffd35b; padding: 0.75em; }
+
+/* Status messages */
+#status-messages {
+    position: absolute; bottom: 10px; left: 10px;
+    padding: 2px 5px; background: rgba( 0, 0, 0, 0.2 );
+    border-radius: 2px; z-index: 20; }
