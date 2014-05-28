@@ -8,7 +8,7 @@ table th {
     padding: 0.625em 0.859em; border: none; background: #ddd;
     border-left: 1px solid #ccc; border-top: 1px solid #ccc;
     text-align: left; color: #777; font-size: 0.8em; }
-table tr th:last-child {
+table th:last-child {
     border-right: 1px solid #ccc; }
 table td {
     padding: 0.5em 0.66em; border: none; color: #333;
@@ -20,8 +20,49 @@ table tr td:first-child {
 table tr:last-child td {
     border-bottom-color: #ccc; }
 
-/* Sizes
+/* Fixed header tables with scrolling body content
  */
-table th.actions,
-table td.actions {
+.table-wrap {
+    position: relative; width: 100%; }
+.table-wrap section.body {
+    overflow-y: auto; width: 100%; }
+
+/* Table headers */
+.table-wrap header {
+    }
+.table-wrap .th {
+    padding: 0.625em 0.859em; border: none; background: #ddd;
+    border-left: 1px solid #ccc; border-top: 1px solid #ccc;
+    text-align: left; color: #777; font-size: 0.8em; float: left;
+    box-sizing: border-box; }
+.table-wrap .th:last-child {
+    border-right: 1px solid #ccc; }
+
+/* Data cells and rows */
+.table-wrap .td {
+    padding: 0.5em 0.66em; border: none; color: #333;
+    border-left: 1px solid #ddd; border-bottom: 1px solid #ddd;
+    float: left; font-size: 0.8em; }
+.table-wrap .row .td:last-child {
+    border-right: 1px solid #ccc; }
+.table-wrap .row .td:first-child {
+    border-left: 1px solid #ccc; }
+.table-wrap .row:last-child .td {
+    border-bottom-color: #ccc; }
+
+/* Expandable length column */
+.table-wrap .th.name,
+.table-wrap .td.name {
+    position: absolute; right: 21.5em; left: 0; }
+
+/* Wrapper for fixed width columns */
+.table-wrap .fixed-wrap {
+    float: right; position: relative; z-index: 1; }
+
+/* Fixed width columns */
+.table-wrap .th.meta,
+.table-wrap .td.meta {
+    width: 10em; }
+.table-wrap .th.actions,
+.table-wrap .td.actions {
     width: 1.5em; }

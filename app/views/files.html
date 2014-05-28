@@ -2,33 +2,35 @@
 
 <section class="full page">
     <h3 class="margin-bottom-20">Files</h3>
-    <div class="scroller">
-        <table cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th><span>Name</span></th>
-                    <th><span>Size</span></th>
-                    <th><span>Date</span></th>
-                    <th class="actions"><span>&nbsp;</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                {{# files }}
-                <tr>
-                    <td>{{name}}</td>
-                    <td>{{size}}</td>
-                    <td>{{date}}</td>
-                    <td class="actions centered-text">
+    <div class="table-wrap">
+        <!-- Table header, fixed position -->
+        <header>
+            <div class="th name">Name</div>
+            <div class="fixed-wrap">
+                <div class="th meta">Size</div>
+                <div class="th meta">Date</div>
+                <div class="th actions">&nbsp;</div>
+            </div>
+        </header>
+        <!-- Table body, scrolling rows -->
+        <section class="body">
+            {{# files }}
+            <div class="row clearfix">
+                <div class="td name">{{name}}</div>
+                <div class="fixed-wrap">
+                    <div class="td meta">{{size}}</div>
+                    <div class="td meta">{{date}}</div>
+                    <div class="td actions centered-text">
                         <i class="fa fa-trash-o"></i>
-                    </td>
-                </tr>
-                {{/ files }}
-                {{^ files.length }}
-                <tr>
-                    <td colspan="4" class="centered-text color-999">You haven't received any files :)</td>
-                </tr>
-                {{/ files }}
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+            {{/ files }}
+            {{^ files.length }}
+            <div class="row">
+                <div class="td centered-text color-999">You haven't received any files :)</div>
+            </div>
+            {{/ files }}
+        </section>
     </div><!-- /scroller -->
 </section>
