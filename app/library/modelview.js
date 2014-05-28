@@ -21,6 +21,8 @@ var ModelView = function () {
     this.data = {};
     // events to bind
     this.events = {};
+    // ractive pointer
+    this.ractive = null;
 
     // load a view file off the filesystem
     this.loadView = function ( path ) {
@@ -54,8 +56,12 @@ var ModelView = function () {
     this.render = function ( body ) {
         // get the root element
         var $root = document.getElementById( 'root' );
+        // if the ractive object exists, tear it down first
+        if ( ! _.isNull( this.ractive ) ) {
+            this.ractive.teardown();
+        }
         // render the ractive view
-        var ractive = new Ractive({
+        this.ractive = new Ractive({
             el: $root,
             template: this.view,
             partials: this.partials,
@@ -63,7 +69,7 @@ var ModelView = function () {
         });
         // attach the events
         for ( var i in this.events ) {
-            ractive.on( i, this.events[ i ] );
+            this.ractive.on( i, this.events[ i ] );
         }
     };
 };

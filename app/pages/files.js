@@ -45,6 +45,7 @@ var FilesPage = function () {
     win.on( 'files.show', function () {
         // get the files
         self.syncFiles();
+        // teardown the ractive bindings first
         // render the page
         ModelView.render();
     });
