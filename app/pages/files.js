@@ -74,6 +74,8 @@ var FilesPage = function () {
     // table body's scrollbar.
     this.updateScroller = _.throttle( function () {
         var $table = document.getElementById( 'files-list' );
+        if ( ! $table ) return;
+        // update the modelview
         ModelView.data.scrollEnabled = $table.scrollHeight > $table.clientHeight;
         ModelView.ractive.update( 'scrollEnabled' );
     }, 250 );

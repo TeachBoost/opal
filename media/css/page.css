@@ -3,11 +3,12 @@
  */
 
 section.page {
-    background: #eee; padding: 12px;
+    background: #eee; padding: 0.75em;
     position: fixed; top: 3em; bottom: 0;
     right: 0; left: 0; box-sizing: border-box;
     border-top: 3px solid #359fa3; }
 
+/* Full width pages */
 section.full.page {
     padding: 0px; }
 section.full.page h3 {
@@ -15,3 +16,19 @@ section.full.page h3 {
 section.full.page .scroller {
     position: absolute; bottom: 0; top: 3em;
     overflow-y: auto; left: 0; right: 0; }
+
+/* Error pages */
+section.error {
+    background: #eee; position: fixed; top: 0;
+    bottom: 0; right: 0; left: 0;
+    box-sizing: border-box; }
+section.error .message {
+    width: 66%; box-sizing: border-box;
+    padding-left: 5.5em; position: absolute;
+    top: calc( 50% - 3em); left: 16.5%; }
+section.error i {
+    font-size: 4em; position: absolute; top: 0;
+    left: 0; color: #aaa;
+    text-shadow: 0 -1px 0 #777, 0 1px 0 #fff; }
+section.error span {
+    font-size: 1.5em; }

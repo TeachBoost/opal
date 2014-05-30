@@ -48,17 +48,15 @@ var flags = {
 // app loading. called when flags are all raised.
 var run = _.once( function ( err ) {
     // if there are any false flags, show the error page
-    if ( err ) {
-        win.emit( 'error.show', Util.getError() );
-    }
+    if ( err ) return;
+
     // if there's any problems with the config, show the
     // settings page
-    else if ( ! Files.hasShareDir() ) {
+    if ( ! Files.hasShareDir() ) {
         win.emit( 'settings.show' );
     }
-    // no issues
+    // no issues, show the files page
     else {
-        // show the files page
         win.emit( 'files.show' );
     }
 });

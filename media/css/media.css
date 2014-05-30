@@ -19,6 +19,8 @@
         font-size: 20px; }
     section.full.page table {
         top: 3.75em; }
+    section.error .message {
+        width: 50%; left: 25%; }
 }
 
 @media only screen and (min-width : 1400px) {
@@ -26,4 +28,6 @@
         font-size: 22px; }
     section.full.page table {
         top: 4em; }
+    section.error .message {
+        width: 40%; left: 30%; }
 }

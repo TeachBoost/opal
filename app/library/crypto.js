@@ -15,7 +15,7 @@ var Crypto = {
     // error messages
     ERR_NOT_ENABLED: "Keybase isn't installed on your system.",
     ERR_NO_FRIENDS: "You aren't tracking anyone on Keybase!",
-    ERR_NO_FRIENDS: "You aren't logged in to Keybase!",
+    ERR_NO_USER: "You aren't logged in to Keybase!",
 
     // loading messages
     LOAD_ENABLED: "Checking if Keybase is installed",
@@ -46,7 +46,7 @@ var Crypto = {
             if ( ! out.length ) {
                 // sometimes err can contain gpg warnings, just
                 // ignore it for now
-                Util.setError( self.ERR_NOT_ENABLED );
+                win.emit( 'error.show', self.ERR_NOT_ENABLED );
                 ! flag && win.emit( 'app.load', 'crypto.enabled', false );
             }
             else {
@@ -56,7 +56,7 @@ var Crypto = {
                     || ! _.has( parsed.user, 'name' )
                     || ! parsed.user.name.length )
                 {
-                    Util.setError( self.ERR_NO_USER );
+                    win.emit( 'error.show', self.ERR_NO_USER );
                     ! flag && win.emit( 'app.load', 'crypto.enabled', false );
                 }
                 // save this info
@@ -87,8 +87,8 @@ var Crypto = {
             // remove status message
             win.emit( 'message.status.remove', 'crypto_friends' );
             // error handle the output
-            if ( err || ! out.length ) {
-                Util.setError( self.ERR_NO_FRIENDS );
+            if ( err || out.length ) {
+                win.emit( 'error.show', self.ERR_NO_FRIENDS );
                 ! flag && win.emit( 'app.load', 'crypto.friends', false );
             }
             else {
