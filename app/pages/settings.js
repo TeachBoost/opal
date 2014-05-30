@@ -4,7 +4,8 @@
 
 // dependencies
 var win
-  , Files;
+  , Files
+  , Util;
 
 // get the model-view
 var ModelView = require( '../library/modelview.js' )(
@@ -22,7 +23,9 @@ ModelView.data = {
     // whether the nav is disabled
     navEnabled: function () {
         return this.shareDir.length > 0;
-    }
+    },
+    // whether the admin page is enabled
+    adminEnabled: false
 };
 
 // set up the model events
@@ -56,13 +59,15 @@ var SettingsPage = function () {
     // render the error page
     win.on( 'settings.show', function () {
         ModelView.data.shareDir = Files.shareDir;
+        ModelView.data.adminEnabled = Util.flags.admin;
         ModelView.render();
     });
 };
 
 // return
-module.exports = function ( _win, _Files ) {
+module.exports = function ( _win, _Files, _Util ) {
     win = _win;
     Files = _Files;
+    Util = _Util;
     return SettingsPage();
 };

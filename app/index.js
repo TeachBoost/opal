@@ -20,13 +20,16 @@ var Util = require( APP_PATH + '/library/util.js' )
   , Menu = require( APP_PATH + '/library/menu.js' )( win, gui )
   , Message = require( APP_PATH + '/library/message.js' )( win );
 
+// read in the command line arguments
+Util.setFlags( gui.App.argv );
+
 // load the pages
 // each page has a window dependency that it attaches
 // events to.
 var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
-  , AdminPage = require( APP_PATH + '/pages/admin.js' )( win )
-  , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files )
-  , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files );
+  , AdminPage = require( APP_PATH + '/pages/admin.js' )( win, Util )
+  , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files, Util )
+  , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files, Util );
 
 // attach the menubar
 win.menu = Menu.menubar();

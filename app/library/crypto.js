@@ -87,7 +87,7 @@ var Crypto = {
             // remove status message
             win.emit( 'message.status.remove', 'crypto_friends' );
             // error handle the output
-            if ( err || out.length ) {
+            if ( err || ! out.length ) {
                 win.emit( 'error.show', self.ERR_NO_FRIENDS );
                 ! flag && win.emit( 'app.load', 'crypto.friends', false );
             }

@@ -34,6 +34,14 @@ nav .icons a:nth-child(2) {
 nav .icons a:nth-child(3) {
     right: 3.5em; }
 
+/* When admin icon is disabled, shift right */
+nav.no-admin .icons a:nth-child(1) {
+    right: 6.5em; }
+nav.no-admin .icons a:nth-child(2) {
+    right: 3.5em; }
+nav.no-admin .icons a:nth-child(3) {
+    right: 0.5em; }
+
 /* Icons within the buttons */
 nav .icons a i.icon {
     font-size: 1.8em; position: relative;

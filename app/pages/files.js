@@ -5,6 +5,7 @@
 // dependencies
 var win
   , Files
+  , Util
   , _ = require( 'underscore' );
 
 module.exports = function ( _win ) {
@@ -24,6 +25,8 @@ ModelView.data = {
     navPage: 'files',
     // whether or not the nav is enabled
     navEnabled: true,
+    // whether the admin page is enabled
+    adminEnabled: false,
     // container for files sent to this user
     files: [],
     // whether or not the scrollbar is visible for
@@ -46,6 +49,8 @@ var FilesPage = function () {
     var self = this;
     // render the error page
     win.on( 'files.show', function () {
+        // set flags
+        ModelView.data.adminEnabled = Util.flags.admin;
         // get the files
         self.syncFiles();
         // teardown the ractive bindings first
@@ -82,8 +87,9 @@ var FilesPage = function () {
 };
 
 // return
-module.exports = function ( _win, _Files ) {
+module.exports = function ( _win, _Files, _Util ) {
     win = _win;
     Files = _Files;
+    Util = _Util;
     return FilesPage();
 };

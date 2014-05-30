@@ -16,6 +16,8 @@ var ModelView = require( '../library/modelview.js' )(
 ModelView.data = {
     // activate nav page
     navPage: 'admin',
+    // whether admin is enabled
+    adminEnabled: true,
     // whether the nav is disabled
     navEnabled: true
 };

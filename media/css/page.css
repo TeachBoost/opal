@@ -6,11 +6,12 @@ section.page {
     background: #eee; padding: 0.75em;
     position: fixed; top: 3em; bottom: 0;
     right: 0; left: 0; box-sizing: border-box;
-    border-top: 3px solid #359fa3; }
+    border-top: 3px solid #359fa3;
+    overflow-y: auto; }
 
 /* Full width pages */
 section.full.page {
-    padding: 0px; }
+    padding: 0px; overflow-y: hidden; }
 section.full.page h3 {
     padding: 0.5em; margin-bottom: 0; }
 section.full.page .scroller {

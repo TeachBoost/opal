@@ -1,6 +1,7 @@
-<nav class="clearfix {{ navEnabled ? '' : 'disabled' }}">
+<nav class="clearfix {{ navEnabled ? '' : 'disabled' }} {{ adminEnabled ? '' : 'no-admin' }}">
     <a href="javascript:;" on-click="navClick:send" class="blue button">Send File</a>
     <div class="icons">
+        {{# adminEnabled }}
         <a href="javascript:;"
             class="{{# navPage == 'admin' }}active{{/ navPage }}"
             on-click="navClick:admin"
@@ -8,6 +9,7 @@
             <i class="fa fa-square arrow"></i>
             <i class="fa fa-flask icon"></i>
         </a>
+        {{/ adminEnabled }}
         <a href="javascript:;"
             class="{{# navPage == 'files' }}active{{/ navPage }}"
             on-click="navClick:files"
