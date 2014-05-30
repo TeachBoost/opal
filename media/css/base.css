@@ -61,11 +61,10 @@ a:hover {
     display: table; overflow: hidden; height: 100%;
     width: 100%; text-align: center; }
 .load-screen .center {
-    width: 5em; height: 5em; top: 50%; left: 50%;
-    position: absolute; margin: -2.5em 0 0 -2.5em; }
-.load-screen i {
-    font-size: 4em; color: #aaa;
-    text-shadow: 0 -1px 0 #888, 0 1px 0 #eee; }
+    width: 5em; height: 6.25em; top: 50%; left: 50%;
+    position: absolute; margin: -3.25em 0 0 -2.5em; }
+.load-screen img {
+    width: 5em; height: 6.25em; }
 
 /* error screen
  */
