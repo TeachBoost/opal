@@ -5,7 +5,7 @@
 // dependencies
 var win
   , Files
-  , ko = require( 'knockout' );
+  , _ = require( 'underscore' );
 
 module.exports = function ( _win ) {
     win = _win;
@@ -25,7 +25,10 @@ ModelView.data = {
     // whether or not the nav is enabled
     navEnabled: true,
     // container for files sent to this user
-    files: []
+    files: [],
+    // whether or not the scrollbar is visible for
+    // the files table
+    scrollEnabled: false
 };
 
 // set up the model events
@@ -47,7 +50,16 @@ var FilesPage = function () {
         self.syncFiles();
         // teardown the ractive bindings first
         // render the page
-        ModelView.render();
+        ModelView.render( function () {
+            // trigger this on render
+            self.updateScroller();
+        });
+    });
+
+    // when the window is resized, we need to adjust
+    // the files table scrollbars.
+    win.on( 'resize', function ( width, height ) {
+        self.updateScroller();
     });
 
     // sync the received files from the Files library with the
@@ -55,6 +67,16 @@ var FilesPage = function () {
     this.syncFiles = function () {
         ModelView.data.files = Files.getReceivedFiles();
     };
+
+    // gets the window height, and the table's
+    // client height to determine if we should shift
+    // the table header over to compensate for the
+    // table body's scrollbar.
+    this.updateScroller = _.throttle( function () {
+        var $table = document.getElementById( 'files-list' );
+        ModelView.data.scrollEnabled = $table.scrollHeight > $table.clientHeight;
+        ModelView.ractive.update( 'scrollEnabled' );
+    }, 250 );
 };
 
 // return

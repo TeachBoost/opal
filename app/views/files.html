@@ -2,7 +2,7 @@
 
 <section class="full page">
     <h3 class="margin-bottom-20">Files</h3>
-    <div class="table-wrap">
+    <div class="table-wrap {{ scrollEnabled ? 'with-scroller' : '' }}">
         <!-- Table header, fixed position -->
         <header class="clearfix">
             <div class="th name"><span>Name</span></div>
@@ -11,7 +11,7 @@
             <div class="th actions"><span>&nbsp;</span></div>
         </header>
         <!-- Table body, scrolling rows -->
-        <section class="body">
+        <section class="body" id="files-list">
             {{# files }}
             <div class="row clearfix">
                 <div class="td name"><span>{{name}}</span></div>

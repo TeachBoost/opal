@@ -53,7 +53,7 @@ var ModelView = function () {
     };
 
     // renders the views and partials to the DOM
-    this.render = function ( body ) {
+    this.render = function ( callback ) {
         // get the root element
         var $root = document.getElementById( 'root' );
         // if the ractive object exists, tear it down first
@@ -71,11 +71,15 @@ var ModelView = function () {
         for ( var i in this.events ) {
             this.ractive.on( i, this.events[ i ] );
         }
+        // if a callback came in, trigger it
+        if ( _.isFunction( callback ) ) {
+            callback();
+        }
     };
 };
 
 // return
-module.exports = function ( view, partials ) {
+module.exports = function ( view, partials, _win ) {
     var view = ( arguments.length )
         ? arguments[ 0 ]
         : null
