@@ -33,6 +33,10 @@ ModelView.events = {
     // open the dev tools
     openDevTools: function () {
         win.showDevTools();
+    },
+    // close the dev tools
+    closeDevTools: function () {
+        win.closeDevTools();
     }
 }
 
