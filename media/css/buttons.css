@@ -6,7 +6,8 @@ a.button,
 input.button {
     border-radius: 3px; border-top-width: 0; border-left-width: 0;
     border-right-width: 0; border-bottom-width: 2px; border-style: solid;
-    padding: 0.375em 0.625em; cursor: pointer; text-decoration: none; }
+    padding: 0.375em 0.625em; cursor: pointer; text-decoration: none;
+    outline: none; }
 .button.fontsize-18 {
     padding: 0.5em 0.875em; border-radius: 4px; }
 .button.fontsize-16 {

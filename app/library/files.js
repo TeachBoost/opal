@@ -13,26 +13,28 @@ var win
   , Util = require( './util.js' );
 
 // library
-var Files = {
+var Files = function () {
+    var self = this;
     // constants
-    ERR_CONFIG_WRITE: "The config file could not be saved.",
-    CHECKING_ACCESS: "Checking directory access",
+    this.ERR_CONFIG_WRITE = "The config file could not be saved.";
+    this.CHECKING_ACCESS ="Checking directory access";
 
+    // keybase user id
+    this.userId = null;
+    // keybase user info
+    this.userObj = null;
     // shared directory path
-    shareDir: null,
-
+    this.shareDir = null;
     // array of friends
-    friends: [],
-
+    this.friends = [];
     // array of sent files, loaded from shared directory
-    sentFiles: [],
-
+    this.sentFiles = [];
     // array of received files, loaded from shared directory
-    receivedFiles: [],
+    this.receivedFiles = [];
 
     // load the configuration file. return false if we can't
     // read or write to it.
-    loadConfig: function () {
+    this.loadConfig = function () {
         var configPath = gui.App.dataPath;
         // check if the file exists
         if ( ! fs.existsSync( configPath + '/config' ) ) {
@@ -54,25 +56,30 @@ var Files = {
             this.shareDir = ( _.has( parsed, 'shareDir' ) )
                 ? parsed.shareDir
                 : null;
+            this.userId = ( _.has( parsed, 'userId' ) )
+                ? parsed.userId
+                : null;
+            this.userObj = ( _.has( parsed, 'userObj' ) )
+                ? parsed.userObj
+                : null;
             this.friends = ( _.has( parsed, 'friends' ) )
                 ? parsed.friends
                 : [];
         } catch ( e ) {
             return false;
         }
-    },
+    };
 
     // whether or not the share directory has been set
-    hasShareDir: function () {
+    this.hasShareDir = function () {
         return this.shareDir
             && this.shareDir.length;
-    },
+    };
 
     // sets the shared directory. this tests if the directory
     // exists and is writable. it will set the working screen
     // while it works and trigger a callback on success.
-    setShareDir: function ( shareDir, callback ) {
-        var self = this;
+    this.setShareDir = function ( shareDir, callback ) {
         // set the app to working-mode
         win.emit( 'message.working', this.CHECKING_ACCESS )
 
@@ -92,14 +99,16 @@ var Files = {
                 callback();
             }
         });
-    },
+    };
 
     // writes the config data to the config file
-    writeConfig: function () {
+    this.writeConfig = function () {
         var configPath = gui.App.dataPath;
         // build the config object
         var config = {
             shareDir: this.shareDir,
+            userId: this.userId,
+            userObj: this.userObj,
             friends: this.friends };
         // write the file
         fs.writeFile(
@@ -110,19 +119,39 @@ var Files = {
                     Util.setError( self.ERR_CONFIG_WRITE );
                 }
             });
-    },
+    };
 
     // load the received files into the local "files" array
     // this will re-scan the user's shared directory looking
     // for any files that were sent to the user.
-    getReceivedFiles: function () {
+    this.getReceivedFiles = function () {
+
+        /*
+        fs.readdir( '/path/to/html/files', function(err, files) {
+            files.filter(function(file) { return file.substr(-5) == '.html'); })
+                .forEach(function(file) { fs.readFile(file, 'utf-8', function(err, contents) { inspectFile(contents); }); });
+        });
+        */
         return [];
-    }
+    };
+
+    // read the user object from the crypto library
+    win.on( 'crypto.user', function ( user ) {
+        self.userId = user.name;
+        self.userObj = user;
+        self.writeConfig();
+    });
+
+    // read the friends array from the crypto library
+    win.on( 'crypto.friends', function ( friends ) {
+        self.friends = friends;
+        self.writeConfig();
+    });
 };
 
 // return
 module.exports = function ( _win, _gui ) {
     win = _win;
     gui = _gui;
-    return Files;
+    return new Files();
 }

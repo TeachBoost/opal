@@ -39,9 +39,30 @@ Files.loadConfig();
 
 // listen for load events
 // all flags need to be raised before the app is run
+// check the config to see if we can bypass anything
 var flags = {
-    'crypto.enabled' : null,
-    'crypto.friends' : null };
+    'crypto.enabled' : ( _.isNull( Files.userId ) ? null : true ),
+    'crypto.friends' : ( _.isNull( Files.friends ) ? null : true )
+};
+
+// app loading. called when flags are all raised.
+var run = _.once( function ( err ) {
+    // if there are any false flags, show the error page
+    if ( err ) {
+        win.emit( 'error.show', Util.getError() );
+    }
+    // if there's any problems with the config, show the
+    // settings page
+    else if ( ! Files.hasShareDir() ) {
+        win.emit( 'settings.show' );
+    }
+    // no issues
+    else {
+        // show the files page
+        win.emit( 'files.show' );
+    }
+});
+
 // once all of our flags have been raised we need to either
 // error handle or run the main application.
 win.on( 'app.load', function ( flag, status ) {
@@ -56,26 +77,11 @@ win.on( 'app.load', function ( flag, status ) {
 });
 
 // crypto library emits events since exec calls are
-// async. we need to listen for these events
-Crypto.enabled();
-Crypto.friends();
-
-// run the app
-var run = _.once( function ( err ) {
-    // if there are any false flags, show the error page
-    if ( err ) {
-        win.emit( 'error.show', Util.getError() );
-    }
-    // if there's any problems with the config, show the
-    // settings page
-    else if ( ! Files.hasShareDir() ) {
-        win.emit( 'settings.show' );
-    }
-    // no issues, show the files page
-    else {
-        win.emit( 'files.show' );
-    }
-});
+// async. we need to listen for these events. we're
+// passing in the flag to tell the crypto library if it
+// should run these tasks in the background or foreground.
+Crypto.enabled( flags[ 'crypto.enabled' ] );
+Crypto.friends( flags[ 'crypto.friends' ] );
 
 // show the window
 win.show();
