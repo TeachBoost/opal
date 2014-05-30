@@ -4,25 +4,21 @@
     <h3 class="margin-bottom-20">Files</h3>
     <div class="table-wrap">
         <!-- Table header, fixed position -->
-        <header>
-            <div class="th name">Name</div>
-            <div class="fixed-wrap">
-                <div class="th meta">Size</div>
-                <div class="th meta">Date</div>
-                <div class="th actions">&nbsp;</div>
-            </div>
+        <header class="clearfix">
+            <div class="th name"><span>Name</span></div>
+            <div class="th meta"><span>Size</span></div>
+            <div class="th meta"><span>Date</span></div>
+            <div class="th actions"><span>&nbsp;</span></div>
         </header>
         <!-- Table body, scrolling rows -->
         <section class="body">
             {{# files }}
             <div class="row clearfix">
-                <div class="td name">{{name}}</div>
-                <div class="fixed-wrap">
-                    <div class="td meta">{{size}}</div>
-                    <div class="td meta">{{date}}</div>
-                    <div class="td actions centered-text">
-                        <i class="fa fa-trash-o"></i>
-                    </div>
+                <div class="td name"><span>{{name}}</span></div>
+                <div class="td meta"><span>{{size}}</span></div>
+                <div class="td meta"><span>{{date}}</span></div>
+                <div class="td actions centered-text">
+                    <i class="fa fa-trash-o"></i>
                 </div>
             </div>
             {{/ files }}
