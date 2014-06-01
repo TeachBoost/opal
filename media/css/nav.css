@@ -60,3 +60,7 @@ nav .icons a.active i.icon {
     top: 0.2em !important; color: #359fa3; }
 nav .icons a.active i.arrow {
     display: block; }
+
+/* Action buttons */
+nav .actions {
+    padding-right: 0.5em; }

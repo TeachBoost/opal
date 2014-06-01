@@ -14,11 +14,9 @@
     "position": "center"
   },
   "dependencies": {
-    "knockout": "*",
-    "mustache": "*",
+    "ractive": "*",
     "exec": "*",
-    "underscore": "*",
-    "font-awesome": "*"
+    "underscore": "*"
   },
   "devDependencies": {
     "node-webkit-builder": "0.0.2"

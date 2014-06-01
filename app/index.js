@@ -27,6 +27,7 @@ Util.setFlags( gui.App.argv );
 // each page has a window dependency that it attaches
 // events to.
 var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
+  , SendPage = require( APP_PATH + '/pages/send.js' )( win, Files )
   , AdminPage = require( APP_PATH + '/pages/admin.js' )( win, Util )
   , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files, Util )
   , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files, Util );
