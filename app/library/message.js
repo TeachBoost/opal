@@ -131,7 +131,7 @@ var Message = function () {
 
         // add the notif
         var id = uuid.v4();
-        NotifModel.data.notifications.push({
+        NotifModel.data.notifications.unshift({
             uuid: id,
             message: message,
             color: bgColor

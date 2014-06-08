@@ -8,7 +8,7 @@
 var exec = require( 'exec' )
   , win
   , _ = require( 'underscore' )
-  , Util = require( './util.js' );
+  , Util = require( 'util' );
 
 // library
 var Crypto = {
@@ -101,6 +101,24 @@ var Crypto = {
                 ! flag && win.emit( 'app.load', 'crypto.friends', true );
             }
         });
+    },
+
+    /**
+     * Encrypts the file using the friend's public key. We
+     * save two encrypted files on this call:
+     *   1) a .info file containing the meta info
+     *   2) a .asc file containing the encrypted file
+     */
+    encrypt: function ( filePath, friend ) {
+        // make the friends directory if it doesn't exist
+
+        // call the keybase encrypt method
+        // keybase encrypt -o DESTINATION friend filePath
+
+        // create a JSON string containing the file's meta
+        // info. encrypt that and save it.
+        // keybase encrypt -m JSON -o DESTINATION friend
+        
     }
 };
 

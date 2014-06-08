@@ -50,9 +50,12 @@ ModelView.events = {
     submit: function () {
         var self = this;
         // verify that a recipient and a file was selected
-        var file, friend = null;
+        var $dialog = document.getElementById( 'attachedFileInput' )
+          , filePath = $dialog.value
+          , $select = document.getElementById( 'friendInput' )
+          , friend = $select.value;
         // encrypt and send the file via the Files library
-        Files.send( file, friend, function () {
+        Files.send( filePath, friend, function () {
             // clear the form and display a success message
             win.emit( 'message.notify', MSG_FILE_SENT, 'success' );
         });
