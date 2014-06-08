@@ -19,6 +19,7 @@
   "license": "GPLv3",
   "private": true,
   "dependencies": {
-    "font-awesome": "~4.1.0"
+    "font-awesome": "~4.1.0",
+    "ractive-transitions-fade": "~0.1.2"
   }
 }

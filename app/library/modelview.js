@@ -5,11 +5,12 @@
  * and rendering.
  */
 
-// dependencies
-// file system interaction
+// var dependencies
 var fs = require( 'fs' )
   , Ractive = require( 'ractive' )
   , _ = require( 'underscore' );
+// global dependencies
+require( './transitions/fade' );
 
 // define the base model
 var ModelView = function () {

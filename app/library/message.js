@@ -6,8 +6,9 @@
  */
 
 // dependencies
-var win,
-    _ = require( 'underscore' );
+var win
+  , _ = require( 'underscore' )
+  , uuid = require( 'node-uuid' );
 
 // ModelView for interacting with the notifications
 var NotifModel = require( '../library/modelview.js' )(
@@ -109,7 +110,15 @@ var Message = function () {
     };
 
     // render a notification to the screen
-    this.notify = function ( message, type, options ) {
+    this.notify = function ( message, type /*, options */ ) {
+        // merge options into our defaults
+        var defaults = {
+                delay: 5000 }
+          , options = ( arguments.length > 2 )
+                ? arguments[ 2 ]
+                : {}
+          , config = _.extend( defaults, options );
+
         // create a new message component and insert it into
         // the top of the notifications element.
         var bgColor;
@@ -119,14 +128,24 @@ var Message = function () {
             case 'warning': bgColor = 'bg-orange'; break;
             case 'info': bgColor = 'bg-blue'; break;
         }
+
         // add the notif
+        var id = uuid.v4();
         NotifModel.data.notifications.push({
+            uuid: id,
             message: message,
             color: bgColor
         });
-        // set a timeout to remove any notifications that
-        // are expired.
-        
+
+        // set a timeout to remove the notification by uuid
+        _.delay( function () {
+            for ( var i in NotifModel.data.notifications ) {
+                var n = NotifModel.data.notifications[ i ];
+                if ( n.uuid == id ) {
+                    NotifModel.data.notifications.splice( i, 1 );
+                }
+            }
+        }, config.delay ); // 5 seconds
     };
 };
 
