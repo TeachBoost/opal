@@ -15,7 +15,8 @@ var ModelView = require( '../library/modelview.js' )(
 
 // set up the model data
 ModelView.data = {
-    attachedFile: ''
+    attachedFile: '',
+    friends: []
 };
 
 // set up the model events
@@ -52,6 +53,7 @@ ModelView.events = {
 var SendPage = function () {
     // render the error page
     win.on( 'send.show', function () {
+        ModelView.data.friends = Files.friends;
         ModelView.render();
     });
 };

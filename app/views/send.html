@@ -6,6 +6,22 @@
     <div class="margin-bottom-10">
         <label>Send To:</label>
     </div>
+    <div class="margin-bottom-20">
+        {{^ friends.length }}
+        <div class="tip round-3">
+            <span>You aren't tracking anyone on Keybase! First, find some friends to track.</span>
+        </div>
+        {{/ friends.length }}
+        {{# friends.length }}
+        <select name="friend">
+            <option value="">Choose a recipient...</option>
+            <option value="">----------</option>
+            {{# friends:i }}
+            <option value="{{ friends[i] }}">{{ friends[i] }}</option>
+            {{/ friends }}
+        </select>
+        {{/ friends.length }}
+    </div>
 
     <!-- Select file -->
     <div class="margin-bottom-10">

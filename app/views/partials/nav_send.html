@@ -4,9 +4,17 @@
         Cancel
     </a>
     <div class="float-right actions">
+        {{# friends.length }}
         <a href="javascript:;" on-click="submit" class="green button">
             <i class="fa fa-send"></i>&nbsp;
             Send File
         </a>
+        {{/ friends.length }}
+        {{^ friends.length }}
+        <a href="javascript:;" class="dark disabled gray button">
+            <i class="fa fa-send"></i>&nbsp;
+            Send File
+        </a>
+        {{/ friends.length }}
     </div>
 </nav>

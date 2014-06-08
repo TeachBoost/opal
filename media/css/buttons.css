@@ -43,6 +43,11 @@ input.button {
     background: #aaa; border-bottom-color: #777; color: #333; }
 .button.dark.gray:hover {
     background: #999; border-bottom-color: #666; color: #222; }
+/* Darker, disabled gray */
+.button.dark.disabled.gray {
+    background: #bbb; border-bottom-color: #999; color: #777; }
+.button.dark.disabled.gray:hover {
+    background: #aaa; border-bottom-color: #888; color: #777; }
 /* Black */
 .button.black {
     background: #333; border-bottom-color: #111; color: #eee; }
