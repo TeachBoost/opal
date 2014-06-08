@@ -6,6 +6,9 @@
 var win
   , Files;
 
+// constants
+var MSG_FILE_SENT = "Your file has been encrypted and sent!";
+
 // get the model-view
 var ModelView = require( '../library/modelview.js' )(
     './app/views/send.html',
@@ -45,7 +48,14 @@ ModelView.events = {
     },
     // submit the form
     submit: function () {
-        console.log( 'submitted form' );
+        var self = this;
+        // verify that a recipient and a file was selected
+        var file, friend = null;
+        // encrypt and send the file via the Files library
+        Files.send( file, friend, function () {
+            // clear the form and display a success message
+            win.emit( 'message.notify', MSG_FILE_SENT, 'success' );
+        });
     }
 }
 

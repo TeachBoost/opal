@@ -53,16 +53,18 @@ var ModelView = function () {
     };
 
     // renders the views and partials to the DOM
-    this.render = function ( callback ) {
+    this.render = function ( callback /*, $el */ ) {
         // get the root element
-        var $root = document.getElementById( 'root' );
+        var $el = ( arguments.length > 1 )
+            ? arguments[ 1 ]
+            : document.getElementById( 'root' );
         // if the ractive object exists, tear it down first
         if ( ! _.isNull( this.ractive ) ) {
             this.ractive.teardown();
         }
         // render the ractive view
         this.ractive = new Ractive({
-            el: $root,
+            el: $el,
             template: this.view,
             partials: this.partials,
             data: this.data

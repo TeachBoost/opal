@@ -1,6 +1,6 @@
 {
   "name": "Opal",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "index.html",
   "description": "Secure file sharing using Keybase",
   "license": "GPLv3",
@@ -16,7 +16,8 @@
   "dependencies": {
     "ractive": "*",
     "exec": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "node-uuid": "*"
   },
   "devDependencies": {
     "node-webkit-builder": "0.0.2"

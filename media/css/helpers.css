@@ -76,6 +76,16 @@
     font-size: 1.25em; }
 .font-courier {
     font-family: 'Courier New', monospace; }
+.bg-blue {
+    background-color: #007db6; }
+.bg-green {
+    background-color: #4da74d; }
+.bg-orange {
+    background-color: #d1712d; }
+.bg-red {
+    background-color: #af362b; }
+.bg-yellow {
+    background-color: #d6a70e; }
 .color-000 {
     color: #000 !important; }
 .color-333 {

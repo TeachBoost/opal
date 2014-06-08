@@ -8,6 +8,9 @@
 // set up path globals
 var APP_PATH = './app';
 
+// expose the document globally
+global.document = window.document;
+
 // get the window object and dependencies
 var gui = require( 'nw.gui' )
   , win = gui.Window.get()
@@ -34,9 +37,6 @@ var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
 
 // attach the menubar
 win.menu = Menu.menubar();
-
-// expose the document globally
-global.document = window.document;
 
 // load the config file async
 Files.loadConfig();

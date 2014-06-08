@@ -135,6 +135,14 @@ var Files = function () {
         return [];
     };
 
+    // encrypt a file for the specified friend. this should use
+    // the crypto library to save the file in the shared directory
+    // and then add an encrypted "info" file.
+    this.send = function ( file, friend, callback ) {
+
+        callback();
+    };
+
     // read the user object from the crypto library
     win.on( 'crypto.user', function ( user ) {
         self.userId = user.name;
