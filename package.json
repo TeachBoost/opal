@@ -1,6 +1,6 @@
 {
   "name": "Opal",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.html",
   "description": "Secure file sharing using Keybase",
   "license": "GPLv3",

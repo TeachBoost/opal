@@ -2,4 +2,22 @@
 
 <section class="page">
     <h3 class="margin-bottom-20">Send a File</h3>
+    <!-- Choose recipient -->
+    <div class="margin-bottom-10">
+        <label>Send To:</label>
+    </div>
+
+    <!-- Select file -->
+    <div class="margin-bottom-10">
+        <label>File to Send:</label>
+    </div>
+    <div class="margin-bottom-15">
+        <input type="text" value="{{attachedFile}}" class="w100p" disabled />
+        <input type="file" name="shareDir"
+            style="display: none;" id="attachedFileInput"
+            on-change="changeFile" />
+    </div>
+    <a class="gray button" href="javascript:;" on-click="openDialog">
+        Choose File
+    </a>
 </section>

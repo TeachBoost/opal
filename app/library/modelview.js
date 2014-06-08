@@ -76,6 +76,13 @@ var ModelView = function () {
             callback();
         }
     };
+
+    // update a data attribute and then trigger the
+    // ractive update.
+    this.update = function ( key, value ) {
+        this.data[ key ] = value;
+        this.ractive.update( key );
+    };
 };
 
 // return

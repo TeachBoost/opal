@@ -38,12 +38,11 @@ ModelView.events = {
     // when the file dialog is changed
     changeDir: function () {
         var $dialog = document.getElementById( 'shareDirFileInput' )
-          , dirPath = $dialog.value
-          , self = this;
+          , dirPath = $dialog.value;
         // set the value to the Files library. if the callback
         // is triggered we'll update the shareDir
         Files.setShareDir( dirPath, function () {
-            self.shareDir( dirPath );
+            ModelView.update( 'shareDir', dirPath );
         });
     },
     // change page event

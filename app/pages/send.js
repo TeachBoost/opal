@@ -15,7 +15,7 @@ var ModelView = require( '../library/modelview.js' )(
 
 // set up the model data
 ModelView.data = {
-
+    attachedFile: ''
 };
 
 // set up the model events
@@ -25,6 +25,22 @@ ModelView.events = {
         if ( page !== this.navPage ) {
             win.emit( page + '.show' );
         }
+    },
+    // cancel button click
+    cancel: function () {
+        ModelView.update( 'attachedFile', '' );
+        win.emit( 'files.show' );
+    },
+    // open the file dialog
+    openDialog: function () {
+        var $dialog = document.getElementById( 'attachedFileInput' );
+        $dialog.click();
+    },
+    // when the file dialog is changed
+    changeFile: function () {
+        var $dialog = document.getElementById( 'attachedFileInput' )
+          , filePath = $dialog.value;
+          ModelView.update( 'attachedFile', filePath );
     },
     // submit the form
     submit: function () {
