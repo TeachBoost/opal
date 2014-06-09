@@ -8,10 +8,10 @@
 // dependencies
 var win
   , gui
+  , Crypto
   , fs = require( 'fs' )
   , _ = require( 'underscore' )
-  , Util = require( 'util' )
-  , Crypto = require( 'crypto' );
+  , Util = require( './util' );
 
 // library
 var Files = function () {
@@ -155,7 +155,7 @@ var Files = function () {
      * the crypto library to save the file in the shared directory
      * and then add an encrypted "info" file.
      */
-    this.send = function ( filePath, friend, callback ) {
+    this.send = function ( filePath, friend ) {
         // check if we got values in
         if ( ! filePath.length || ! friend.length ) {
             win.emit( 'message.notify', this.ERR_BAD_SEND_INPUT, 'info' );
@@ -164,7 +164,7 @@ var Files = function () {
         // check if the friend exists
         if ( _.indexOf( this.friends, friend ) == -1 ) {
             win.emit( 'message.notify', this.ERR_BAD_FRIEND, 'info' );
-            return false;
+            //return false;
         }
         // check if the file exists
         if ( ! fs.existsSync( filePath ) ) {
@@ -174,9 +174,7 @@ var Files = function () {
         // encrypt the file using the Crypto library. this will
         // be done asynchronously so we can call our callback on
         // success.
-        if ( Crypto.encrypt( filePath, friend ) ) {
-            callback();
-        }
+        Crypto.encrypt( filePath, friend, this.shareDir );
     };
 
     /**
@@ -198,8 +196,9 @@ var Files = function () {
 };
 
 // return
-module.exports = function ( _win, _gui ) {
+module.exports = function ( _win, _gui, _Crypto ) {
     win = _win;
     gui = _gui;
+    Crypto = _Crypto;
     return new Files();
 }

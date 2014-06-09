@@ -28,6 +28,16 @@ var Util = {
     // get the error message
     getError: function () {
         return this.errorMessage;
+    },
+
+    // log a message
+    log: function ( message, type ) {
+        switch ( type ) {
+            case 'debug': console.log( message ); break;
+            case 'error': console.error( message ); break;
+            case 'info' : console.info( message ); break;
+            case 'warn' : console.warn( message ); break;
+        }
     }
 };
 

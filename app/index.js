@@ -19,7 +19,7 @@ var gui = require( 'nw.gui' )
 // load the app modules
 var Util = require( APP_PATH + '/library/util.js' )
   , Crypto = require( APP_PATH + '/library/crypto.js' )( win )
-  , Files = require( APP_PATH + '/library/files.js' )( win, gui )
+  , Files = require( APP_PATH + '/library/files.js' )( win, gui, Crypto )
   , Menu = require( APP_PATH + '/library/menu.js' )( win, gui )
   , Message = require( APP_PATH + '/library/message.js' )( win );
 
@@ -29,11 +29,11 @@ Util.setFlags( gui.App.argv );
 // load the pages
 // each page has a window dependency that it attaches
 // events to.
-var ErrorPage = require( APP_PATH + '/pages/error.js' )( win )
-  , SendPage = require( APP_PATH + '/pages/send.js' )( win, Files )
-  , AdminPage = require( APP_PATH + '/pages/admin.js' )( win, Util )
-  , FilesPage = require( APP_PATH + '/pages/files.js' )( win, Files, Util )
-  , SettingsPage = require( APP_PATH + '/pages/settings.js' )( win, Files, Util );
+require( APP_PATH + '/pages/error.js' )( win );
+require( APP_PATH + '/pages/send.js' )( win, Files );
+require( APP_PATH + '/pages/admin.js' )( win, Util );
+require( APP_PATH + '/pages/files.js' )( win, Files, Util );
+require( APP_PATH + '/pages/settings.js' )( win, Files, Util );
 
 // attach the menubar
 win.menu = Menu.menubar();

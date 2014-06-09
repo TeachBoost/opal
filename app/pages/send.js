@@ -32,7 +32,7 @@ ModelView.events = {
     },
     // cancel button click
     cancel: function () {
-        ModelView.update( 'attachedFile', '' );
+        ModelView.ractive.fire( 'clearForm' );
         win.emit( 'files.show' );
     },
     // open the file dialog
@@ -53,14 +53,19 @@ ModelView.events = {
         var $dialog = document.getElementById( 'attachedFileInput' )
           , filePath = $dialog.value
           , $select = document.getElementById( 'friendInput' )
-          , friend = $select.value;
+          , friend = 'mikegioia'; //$select.value;
         // encrypt and send the file via the Files library
-        Files.send( filePath, friend, function () {
-            // clear the form and display a success message
-            win.emit( 'message.notify', MSG_FILE_SENT, 'success' );
-        });
+        Files.send( filePath, friend );
+    },
+    // clear the webform
+    clearForm: function () {
+        var $dialog = document.getElementById( 'attachedFileInput' )
+          , $select = document.getElementById( 'friendInput' );
+        $dialog.value = '';
+        $select.value = '';
+        ModelView.update( 'attachedFile', '' );
     }
-}
+};
 
 // library
 var SendPage = function () {
@@ -68,6 +73,11 @@ var SendPage = function () {
     win.on( 'send.show', function () {
         ModelView.data.friends = Files.friends;
         ModelView.render();
+    });
+    // clear the form
+    win.on( 'send.success', function () {
+        ModelView.ractive.fire( 'clearForm' );
+        win.emit( 'message.notify', MSG_FILE_SENT, 'success' );
     });
 };
 

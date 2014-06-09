@@ -90,6 +90,12 @@ a:hover {
     border-left: 4px solid #d6a70e !important;
     background: #ffd35b; padding: 0.75em; }
 
+/* Overlay */
+#overlay {
+    position: absolute; top: 0; bottom: 0; left: 0;
+    right: 0; background: rgba( 0, 0, 0, 0.4 );
+    z-index: 15; display: none; }
+
 /* Status messages */
 #status-messages {
     position: absolute; bottom: 10px; left: 10px;
@@ -100,7 +106,7 @@ a:hover {
 #notifications {
     position: absolute; top: 3em; bottom: 0;
     right: 0; width: 18em; border-top: 2px solid transparent;
-    overflow: hidden; }
+    overflow: hidden; z-index: 20; }
 #notifications .message {
     margin: 0.5em 0.5em 0 0.5em; color: #fff; cursor: pointer;
     padding: 0.5em; border-radius: 3px; }

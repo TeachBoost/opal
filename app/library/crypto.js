@@ -6,33 +6,42 @@
 
 // dependencies
 var exec = require( 'exec' )
+//, execSync = require( 'child_process' ).execSync
+  , path = require( 'path' )
+  , uuid = require( 'node-uuid' )
   , win
+  , fs = require( 'fs' )
   , _ = require( 'underscore' )
-  , Util = require( 'util' );
+  , Util = require( './util' );
 
 // library
-var Crypto = {
+var Crypto = function () {
+    var self = this;
+
     // error messages
-    ERR_NOT_ENABLED: "Keybase isn't installed on your system.",
-    ERR_NO_FRIENDS: "You aren't tracking anyone on Keybase!",
-    ERR_NO_USER: "You aren't logged in to Keybase!",
+    this.ERR_NOT_ENABLED = "Keybase isn't installed on your system.";
+    this.ERR_NO_FRIENDS = "You aren't tracking anyone on Keybase!";
+    this.ERR_NO_USER = "You aren't logged in to Keybase!";
+    this.ERR_BAD_MKDIR = "There was a problem creating your friend's shared folder.";
+    this.ERR_BAD_ENCRYPT = "There was a problem encrypting your file.";
 
     // loading messages
-    LOAD_ENABLED: "Checking if Keybase is installed",
-    LOAD_FRIENDS: "Loading your Keybase friends",
+    this.LOAD_ENABLED = "Checking if Keybase is installed";
+    this.LOAD_FRIENDS = "Loading your Keybase friends";
+    this.LOAD_ENCRYPTING = "Encrypting file, hang on";
 
     // keybase status
-    status: null,
+    this.status = null;
     // keybase user
-    user: null,
+    this.user = null;
     // tracked users (friends)
-    friends: [],
+    this.friends = [];
 
     /**
      * Is keybase enabled? is there a user session?
      * @param flag If true, run task in background
      */ 
-    enabled: function ( flag ) {
+    this.enabled = function ( flag ) {
         var self = this;
         // set the status message
         win.emit( 'message.status', this.LOAD_ENABLED, 'crypto_enabled' );
@@ -69,13 +78,13 @@ var Crypto = {
                 ! flag && win.emit( 'app.load', 'crypto.enabled', true );
             }
         });
-    },
+    };
 
     /**
      * Are they tracking anyone?
      * @param flag If true, run task in background
      */
-    friends: function ( flag ) {
+    this.friends = function ( flag ) {
         var self = this;
         // set the status message
         win.emit( 'message.status', this.LOAD_FRIENDS, 'crypto_friends' );
@@ -101,7 +110,7 @@ var Crypto = {
                 ! flag && win.emit( 'app.load', 'crypto.friends', true );
             }
         });
-    },
+    };
 
     /**
      * Encrypts the file using the friend's public key. We
@@ -109,21 +118,84 @@ var Crypto = {
      *   1) a .info file containing the meta info
      *   2) a .asc file containing the encrypted file
      */
-    encrypt: function ( filePath, friend ) {
+    this.encrypt = function ( filePath, friend, destFolder ) {
+        // set up the destination files
+        // generate a new random uuid for the filename
+        var destPath = destFolder + "/" + friend
+          , id = uuid.v4()
+          , destFile = destPath + '/' + id + '.asc'
+          , destMeta = destPath + '/' + id + '.info'
+        // stat the file and get the meta info about it. store this in
+        // a json string which will be encrypted later.
+          , fileName = path.basename( filePath )
+          , fileStats = fs.statSync( filePath )
+          , now = new Date()
+          , meta = {
+                name: fileName,
+                size: fileStats[ 'size' ],
+                time: now.getTime() }
+          , metaJson = JSON.stringify( meta, null, 4 );
+
         // make the friends directory if it doesn't exist
+        if ( ! fs.existsSync( destPath ) ) {
+            try {
+                fs.mkdirSync( destPath );
+            } catch ( e ) {
+                win.emit( 'message.notify', this.ERR_BAD_MKDIR, 'error' );
+                return false;
+            }
+        }
 
-        // call the keybase encrypt method
+        // since there's no execSync support yet, we need to define
+        // the functions first and order everything via callbacks.
         // keybase encrypt -o DESTINATION friend filePath
-
-        // create a JSON string containing the file's meta
-        // info. encrypt that and save it.
-        // keybase encrypt -m JSON -o DESTINATION friend
-        
-    }
+        var _cmdEncryptFile = 'keybase encrypt -o ' + destFile + ' ' + friend + ' ' + filePath
+          , _encryptFile = function () {
+                // attach an overlay to lock the user from doing anything
+                win.emit( 'message.overlay' );
+                // set our status message
+                win.emit( 'message.status', self.LOAD_ENCRYPTING, 'crypto_send' );
+                // exec the keybase command
+                exec( _cmdEncryptFile, function ( err, out, code ) {
+                    // remove status message and error handle
+                    win.emit( 'message.status.remove', 'crypto_send' );
+                    if ( err || err.length ) {
+                        Util.log( "Error encrypting file: " + err, 'error' );
+                        // kill overlay and show error
+                        win.emit( 'message.overlay.remove' );
+                        win.emit( 'message.notify', self.ERR_BAD_ENCRYPT, 'error' );
+                    } else {
+                        _encryptMeta();
+                    }
+                });
+            }
+            // keybase encrypt -m JSON -o DESTINATION friend
+          , _cmdEncryptMeta = "keybase encrypt -m '" + metaJson + "' -o " + destMeta + " " + friend
+          , _encryptMeta = function () {
+                // set the status message
+                win.emit( 'message.status', self.LOAD_ENCRYPTING, 'crypto_send_meta' );
+                // exec the keybase command
+                exec( _cmdEncryptMeta, function ( err, out, code ) {
+                    // remove status message and error handle
+                    win.emit( 'message.status.remove', 'crypto_send_meta' );
+                    win.emit( 'message.overlay.remove' );
+                    if ( err || err.length ) {
+                        Util.log( "Error encrypting meta: " + err, 'error' );
+                        win.emit( 'message.notify', self.ERR_BAD_ENCRYPT, 'error' );
+                    } else {
+                        // set the success message and 
+                        win.emit( 'send.success' );
+                    }
+                });
+            };
+        // encrypt the file first, then if that succeeded encrypt
+        // the meta info.
+        _encryptFile();
+    };
 };
 
 // return
 module.exports = function ( _win ) {
     win = _win;
-    return Crypto;
+    return new Crypto();
 };

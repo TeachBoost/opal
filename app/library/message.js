@@ -54,6 +54,14 @@ var Message = function () {
         self.notify( message, type, options );
     });
 
+    // overlay
+    win.on( 'message.overlay', function () {
+        self.overlay();
+    });
+    win.on( 'message.overlay.remove', function () {
+        self.removeOverlay();
+    });
+
     // show the working/status message
     this.updateWorking = function ( message ) {
         return this.updateStatus( message, 'loading' );
@@ -146,6 +154,21 @@ var Message = function () {
                 }
             }
         }, config.delay ); // 5 seconds
+    };
+
+    /**
+     * Render the overlay on the screen loving the user from
+     * performing any actions.
+     */
+    this.overlay = function () {
+        document.getElementById( 'overlay' ).style.display = 'block';
+    };
+
+    /**
+     * Remove the overlay
+     */
+    this.removeOverlay = function () {
+        document.getElementById( 'overlay' ).style.display = 'none';
     };
 };
 
