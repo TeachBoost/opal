@@ -60,10 +60,8 @@ ModelView.events = {
     },
     // clear the webform
     clearForm: function () {
-        var $dialog = document.getElementById( 'attachedFileInput' )
-          , $select = document.getElementById( 'friendInput' );
+        var $dialog = document.getElementById( 'attachedFileInput' );
         $dialog.value = '';
-        $select.value = '';
         ModelView.update( 'attachedFile', '' );
     }
 };
@@ -73,7 +71,7 @@ var SendPage = function () {
     // render the error page
     win.on( 'send.show', function () {
         // add self to friends list
-        var friends = Files.friends;
+        var friends = _.clone( Files.friends );
         friends.push( Files.userId );
         // sort by name
         _.sortBy( friends, function ( name ) { return name; } );
