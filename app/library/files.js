@@ -161,10 +161,13 @@ var Files = function () {
             win.emit( 'message.notify', this.ERR_BAD_SEND_INPUT, 'info' );
             return false;
         }
-        // check if the friend exists
-        if ( _.indexOf( this.friends, friend ) == -1 ) {
+        // check if the friend exists. we also will allow the user to
+        // send files to themself. their username always appears in
+        // the recipients select list.
+        if ( _.indexOf( this.friends, friend ) == -1
+            && this.userId != friend ) {
             win.emit( 'message.notify', this.ERR_BAD_FRIEND, 'info' );
-            //return false;
+            return false;
         }
         // check if the file exists
         if ( ! fs.existsSync( filePath ) ) {

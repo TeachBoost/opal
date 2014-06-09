@@ -4,7 +4,8 @@
 
 // dependencies
 var win
-  , Files;
+  , Files
+  , _ = require( 'underscore' );
 
 // constants
 var MSG_FILE_SENT = "Your file has been encrypted and sent!";
@@ -53,7 +54,7 @@ ModelView.events = {
         var $dialog = document.getElementById( 'attachedFileInput' )
           , filePath = $dialog.value
           , $select = document.getElementById( 'friendInput' )
-          , friend = 'mikegioia'; //$select.value;
+          , friend = $select.value;
         // encrypt and send the file via the Files library
         Files.send( filePath, friend );
     },
@@ -71,7 +72,13 @@ ModelView.events = {
 var SendPage = function () {
     // render the error page
     win.on( 'send.show', function () {
-        ModelView.data.friends = Files.friends;
+        // add self to friends list
+        var friends = Files.friends;
+        friends.push( Files.userId );
+        // sort by name
+        _.sortBy( friends, function ( name ) { return name; } );
+        // render the view
+        ModelView.data.friends = friends;
         ModelView.render();
     });
     // clear the form

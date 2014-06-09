@@ -3,16 +3,12 @@
 <section class="page">
     <h3 class="margin-bottom-20">Send a File</h3>
     <!-- Choose recipient -->
-    <div class="margin-bottom-10">
-        <label>Send To:</label>
-    </div>
     <div class="margin-bottom-20">
-        {{^ friends.length }}
-        <div class="tip round-3">
+        {{# friends.length <= 1 }}
+        <div class="tip round-3 margin-bottom-10">
             <span>You aren't tracking anyone on Keybase! First, find some friends to track.</span>
         </div>
         {{/ friends.length }}
-        {{# friends.length }}
         <select name="friend" id="friendInput">
             <option value="">Choose a recipient...</option>
             <option value="">----------</option>
@@ -20,7 +16,6 @@
             <option value="{{ friends[i] }}">{{ friends[i] }}</option>
             {{/ friends }}
         </select>
-        {{/ friends.length }}
     </div>
 
     <!-- Select file -->
