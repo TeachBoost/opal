@@ -51,8 +51,8 @@ var SentPage = function () {
     win.on( 'sent.show', function () {
         // set flags
         ModelView.data.adminEnabled = Util.flags.admin;
-        // get the files
-        self.syncFiles();
+        // get the files; emits an event when done
+        Files.getSentFiles();
         // teardown the ractive bindings first
         // render the page
         ModelView.render( function () {
@@ -72,11 +72,11 @@ var SentPage = function () {
         Files.logSentFile( meta );
     });
 
-    // sync the received files from the Files library with the
-    // locally stored copy in the model-view data
-    this.syncFiles = function () {
-        ModelView.data.files = Files.getSentFiles();
-    };
+    // when files are loaded, reset the view
+    win.on( 'sent.files.loaded', function ( files ) {
+        ModelView.data.files = files;
+        ModelView.ractive.update( 'files' );
+    });
 
     // gets the window height, and the table's
     // client height to determine if we should shift

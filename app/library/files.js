@@ -9,6 +9,7 @@
 var win
   , gui
   , fs = require( 'fs' )
+  , lineReader = require( 'line-reader' )
   , _ = require( 'underscore' )
   , Util = require( './util' );
 
@@ -19,10 +20,11 @@ var Files = function () {
     // constants
     this.ERR_CONFIG_WRITE = "The config file could not be saved.";
     this.ERR_SENT_LOG_WRITE = "The sent log file could not be saved.";
-    this.CHECKING_ACCESS ="Checking directory access";
     this.ERR_BAD_SEND_INPUT = "Please choose a friend from the list and select a file before sending.";
     this.ERR_BAD_FRIEND = "You're not tracking that person! Pick a valid recipient.";
     this.ERR_NO_FILE = "The file you selected could not be read from your computer.";
+    this.CHECKING_ACCESS = "Checking directory access";
+    this.GETTING_SENT_FILES = "Loading sent files";
 
     // keybase user id
     this.userId = null;
@@ -159,7 +161,26 @@ var Files = function () {
      * sent files.
      */
     this.getSentFiles = function () {
-        return [];
+        // return files if we loaded already
+        if ( this.sentFiles.length > 0 ) {
+            win.emit( 'sent.files.loaded', this.sentFiles );
+        }
+
+        // read the config file
+        var self = this
+          , configPath = gui.App.dataPath;
+        this.sentFiles = [];
+
+        // set status message
+        win.emit( 'message.status', this.GETTING_SENT_FILES, 'files_load_sent' );
+
+        // read all lines
+        lineReader.eachLine( configPath + '/sent.log', function( line ) {
+            self.sentFiles.unshift( JSON.parse( line ) );
+        }).then( function () {
+            win.emit( 'message.status.remove', 'files_load_sent' );
+            win.emit( 'sent.files.loaded', self.sentFiles );
+        });
     };
 
     /**

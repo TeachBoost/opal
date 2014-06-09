@@ -18,7 +18,8 @@
     "exec": "*",
     "underscore": "*",
     "node-uuid": "*",
-    "chokidar": "*"
+    "chokidar": "*",
+    "line-reader": "*"
   },
   "devDependencies": {
     "node-webkit-builder": "0.0.2"
