@@ -47,7 +47,7 @@ ModelView.events = {
 // library
 var FilesPage = function () {
     var self = this;
-    // render the error page
+    // render the files page
     win.on( 'files.show', function () {
         // set flags
         ModelView.data.adminEnabled = Util.flags.admin;

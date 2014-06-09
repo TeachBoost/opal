@@ -26,5 +26,5 @@ var ErrorPage = function () {
 // return
 module.exports = function ( _win ) {
     win = _win;
-    return new ErrorPage();
+    return ErrorPage();
 };

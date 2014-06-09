@@ -1,5 +1,32 @@
 {{> nav }}
 
-<section class="page">
+<section class="full page">
     <h3 class="margin-bottom-20">Sent Files</h3>
+    <div class="table-wrap {{ scrollEnabled ? 'with-scroller' : '' }}">
+        <!-- Table header, fixed position -->
+        <header class="clearfix">
+            <div class="th name"><span>Name</span></div>
+            <div class="th meta"><span>Size</span></div>
+            <div class="th meta"><span>Date</span></div>
+            <div class="th actions"><span>&nbsp;</span></div>
+        </header>
+        <!-- Table body, scrolling rows -->
+        <section class="body" id="sent-list">
+            {{# files }}
+            <div class="row clearfix">
+                <div class="td name"><span>{{name}}</span></div>
+                <div class="td meta"><span>{{size}}</span></div>
+                <div class="td meta"><span>{{date}}</span></div>
+                <div class="td actions centered-text">
+                    <i class="fa fa-trash-o"></i>
+                </div>
+            </div>
+            {{/ files }}
+            {{^ files.length }}
+            <div class="row">
+                <div class="td centered-text color-999 float-none">You haven't sent any files :)</div>
+            </div>
+            {{/ files }}
+        </section>
+    </div><!-- /scroller -->
 </section>

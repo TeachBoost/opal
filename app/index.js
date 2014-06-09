@@ -33,6 +33,7 @@ require( APP_PATH + '/pages/error.js' )( win );
 require( APP_PATH + '/pages/send.js' )( win, Files );
 require( APP_PATH + '/pages/admin.js' )( win, Util );
 require( APP_PATH + '/pages/files.js' )( win, Files, Util );
+require( APP_PATH + '/pages/sent.js' )( win, Files, Util );
 require( APP_PATH + '/pages/settings.js' )( win, Files, Util );
 
 // attach the menubar

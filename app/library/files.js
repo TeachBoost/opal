@@ -151,6 +151,17 @@ var Files = function () {
     };
 
     /**
+     * Load the sent files into the local "sent" array.
+     * Sent files are handled differently than encrypted
+     * ones: whenever a file is sent, it's appended to the
+     * user's local log and this log file is read to get the
+     * sent files.
+     */
+    this.getSentFiles = function () {
+        return [];
+    };
+
+    /**
      * Encrypt a file for the specified friend. this should use
      * the crypto library to save the file in the shared directory
      * and then add an encrypted "info" file.
