@@ -73,8 +73,6 @@ var SendPage = function () {
         // add self to friends list
         var friends = _.clone( Files.friends );
         friends.push( Files.userId );
-        // sort by name
-        _.sortBy( friends, function ( name ) { return name; } );
         // render the view
         ModelView.data.friends = friends;
         ModelView.render();

@@ -67,6 +67,11 @@ var SentPage = function () {
         self.updateScroller();
     });
 
+    // log a sent file
+    win.on( 'sent.log', function ( meta ) {
+        Files.logSentFile( meta );
+    });
+
     // sync the received files from the Files library with the
     // locally stored copy in the model-view data
     this.syncFiles = function () {

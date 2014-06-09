@@ -185,8 +185,12 @@ var Crypto = function () {
                         Util.log( "Error encrypting meta: " + err, 'error' );
                         win.emit( 'message.notify', self.ERR_BAD_ENCRYPT, 'error' );
                     } else {
-                        // set the success message and 
+                        // set the success message and emit an event to
+                        // log the file.
+                        meta.id = id;
+                        meta.filePath = filePath;
                         win.emit( 'send.success' );
+                        win.emit( 'sent.log', meta );
                     }
                 });
             };
@@ -194,6 +198,10 @@ var Crypto = function () {
         // the meta info.
         _encryptFile();
     };
+
+    win.on( 'crypto.encrypt', function ( filePath, friend, destFolder ) {
+        self.encrypt( filePath, friend, destFolder );
+    });
 };
 
 // return

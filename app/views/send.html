@@ -12,8 +12,8 @@
         <select name="friend" id="friendInput">
             <option value="">Choose a recipient...</option>
             <option value="">----------</option>
-            {{# friends:i }}
-            <option value="{{ friends[i] }}">{{ friends[i] }}</option>
+            {{#( friends.sort() )}}
+            <option value="{{ this }}">{{ this }}</option>
             {{/ friends }}
         </select>
     </div>

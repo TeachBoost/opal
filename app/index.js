@@ -19,7 +19,7 @@ var gui = require( 'nw.gui' )
 // load the app modules
 var Util = require( APP_PATH + '/library/util.js' )
   , Crypto = require( APP_PATH + '/library/crypto.js' )( win )
-  , Files = require( APP_PATH + '/library/files.js' )( win, gui, Crypto )
+  , Files = require( APP_PATH + '/library/files.js' )( win, gui )
   , Menu = require( APP_PATH + '/library/menu.js' )( win, gui )
   , Message = require( APP_PATH + '/library/message.js' )( win );
 

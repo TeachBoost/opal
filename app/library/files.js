@@ -8,7 +8,6 @@
 // dependencies
 var win
   , gui
-  , Crypto
   , fs = require( 'fs' )
   , _ = require( 'underscore' )
   , Util = require( './util' );
@@ -19,6 +18,7 @@ var Files = function () {
 
     // constants
     this.ERR_CONFIG_WRITE = "The config file could not be saved.";
+    this.ERR_SENT_LOG_WRITE = "The sent log file could not be saved.";
     this.CHECKING_ACCESS ="Checking directory access";
     this.ERR_BAD_SEND_INPUT = "Please choose a friend from the list and select a file before sending.";
     this.ERR_BAD_FRIEND = "You're not tracking that person! Pick a valid recipient.";
@@ -129,7 +129,8 @@ var Files = function () {
             JSON.stringify( config, null, 4 ),
             function ( err ) {
                 if ( err ) {
-                    Util.setError( self.ERR_CONFIG_WRITE );
+                    Util.log( 'Failed writing config file: ' + err, 'error' );
+                    win.emit( 'message.notify', self.ERR_CONFIG_WRITE, 'error' );
                 }
             });
     };
@@ -162,6 +163,23 @@ var Files = function () {
     };
 
     /**
+     * Write a sent file to the user's log
+     */
+    this.logSentFile = function ( meta ) {
+        var configPath = gui.App.dataPath;
+        // write the file
+        fs.appendFile(
+            configPath + '/sent.log',
+            JSON.stringify( meta ),
+            function ( err ) {
+                if ( err ) {
+                    Util.log( 'Failed logging sent file: ' + err, 'error' );
+                    win.emit( 'message.notify', self.ERR_SENT_LOG_WRITE, 'error' );
+                }
+            });
+    };
+
+    /**
      * Encrypt a file for the specified friend. this should use
      * the crypto library to save the file in the shared directory
      * and then add an encrypted "info" file.
@@ -188,7 +206,7 @@ var Files = function () {
         // encrypt the file using the Crypto library. this will
         // be done asynchronously so we can call our callback on
         // success.
-        Crypto.encrypt( filePath, friend, this.shareDir );
+        win.emit( 'crypto.encrypt', filePath, friend, this.shareDir );
     };
 
     /**
@@ -210,9 +228,8 @@ var Files = function () {
 };
 
 // return
-module.exports = function ( _win, _gui, _Crypto ) {
+module.exports = function ( _win, _gui ) {
     win = _win;
     gui = _gui;
-    Crypto = _Crypto;
     return new Files();
 }
