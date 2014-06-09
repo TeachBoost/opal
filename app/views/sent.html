@@ -14,10 +14,15 @@
         <section class="body" id="sent-list">
             {{# files }}
             <div class="row clearfix">
-                <div class="td name"><span>{{name}}</span></div>
-                <div class="td meta"><span>{{size}}</span></div>
-                <div class="td meta"><span>{{time}}</span></div>
+                <div class="td name">
+                    <span>
+                        <a href="javascript:;">{{name}}</a>
+                    </span>
+                </div>
+                <div class="td meta"><span>{{ sizeFormat(size) }}</span></div>
+                <div class="td meta"><span>{{ dateFormat(time) }}</span></div>
                 <div class="td actions centered-text">
+                    <span>&nbsp;</span>
                     <i class="fa fa-trash-o"></i>
                 </div>
             </div>

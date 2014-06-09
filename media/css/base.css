@@ -104,9 +104,9 @@ a:hover {
 
 /* Notifications */
 #notifications {
-    position: absolute; top: 3em; bottom: 0;
-    right: 0; width: 18em; border-top: 2px solid transparent;
-    overflow: hidden; z-index: 20; }
+    position: absolute; top: 3em; right: 0; width: 18em;
+    border-top: 2px solid transparent; z-index: 20;
+    overflow: hidden; }
 #notifications .message {
     margin: 0.5em 0.5em 0 0.5em; color: #fff; cursor: pointer;
     padding: 0.5em; border-radius: 3px; }

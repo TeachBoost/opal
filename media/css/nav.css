@@ -6,7 +6,7 @@
 nav {
     background: #ccc; width: 100%;
     box-sizing: border-box; padding-left: 0.5em;
-    position: relative; z-index: 1;
+    position: fixed; z-index: 1;
     height: 3em; line-height: 2.9em;
     overflow: hidden; }
 

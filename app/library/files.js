@@ -165,15 +165,16 @@ var Files = function () {
         if ( this.sentFiles.length > 0 ) {
             win.emit( 'sent.files.loaded', this.sentFiles );
         }
-
         // read the config file
         var self = this
           , configPath = gui.App.dataPath;
         this.sentFiles = [];
-
+        // check if the file exists
+        if ( ! fs.existsSync( configPath + '/sent.log' ) ) {
+            return false;
+        }
         // set status message
         win.emit( 'message.status', this.GETTING_SENT_FILES, 'files_load_sent' );
-
         // read all lines
         lineReader.eachLine( configPath + '/sent.log', function( line ) {
             self.sentFiles.unshift( JSON.parse( line ) );
@@ -191,7 +192,7 @@ var Files = function () {
         // write the file
         fs.appendFile(
             configPath + '/sent.log',
-            JSON.stringify( meta ),
+            JSON.stringify( meta ) + "\n",
             function ( err ) {
                 if ( err ) {
                     Util.log( 'Failed logging sent file: ' + err, 'error' );

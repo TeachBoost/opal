@@ -6,6 +6,8 @@
 var win
   , Files
   , Util
+  , moment = require( 'moment' )
+  , filesize = require( 'file-size' )
   , _ = require( 'underscore' );
 
 module.exports = function ( _win ) {
@@ -31,7 +33,15 @@ ModelView.data = {
     files: [],
     // whether or not the scrollbar is visible for
     // the files table
-    scrollEnabled: false
+    scrollEnabled: false,
+    // table dates
+    dateFormat: function ( time ) {
+        return moment( time ).format( 'D MMM' );
+    },
+    // table filesizes
+    sizeFormat: function ( size ) {
+        return filesize( size ).human({ si: true });
+    }
 };
 
 // set up the model events
