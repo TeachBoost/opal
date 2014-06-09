@@ -132,6 +132,8 @@ var Crypto = function () {
           , now = new Date()
           , meta = {
                 name: fileName,
+                to: friend,
+                from: this.user.name,
                 size: fileStats[ 'size' ],
                 time: now.getTime() }
           , metaJson = JSON.stringify( meta, null, 4 );
