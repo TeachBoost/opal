@@ -161,8 +161,8 @@ var Crypto = function () {
                 exec( _cmdEncryptFile, function ( err, out, code ) {
                     // remove status message and error handle
                     win.emit( 'message.status.remove', 'crypto_send' );
-                    if ( err || err.length ) {
-                        Util.log( "Error encrypting file: " + err, 'error' );
+                    if ( err instanceof Error ) {
+                        Util.log( "Error encrypting file: " + err.message, 'error' );
                         // kill overlay and show error
                         win.emit( 'message.overlay.remove' );
                         win.emit( 'message.notify', self.ERR_BAD_ENCRYPT, 'error' );
@@ -181,8 +181,8 @@ var Crypto = function () {
                     // remove status message and error handle
                     win.emit( 'message.status.remove', 'crypto_send_meta' );
                     win.emit( 'message.overlay.remove' );
-                    if ( err || err.length ) {
-                        Util.log( "Error encrypting meta: " + err, 'error' );
+                    if ( err instanceof Error ) {
+                        Util.log( "Error encrypting meta: " + err.message, 'error' );
                         win.emit( 'message.notify', self.ERR_BAD_ENCRYPT, 'error' );
                     } else {
                         // set the success message and emit an event to

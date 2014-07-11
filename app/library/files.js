@@ -235,6 +235,7 @@ var Files = function () {
      * Read the user object from the crypto library
      */
     win.on( 'crypto.user', function ( user ) {
+        if ( ! user || ! _.has( user, 'name' ) ) return;
         self.userId = user.name;
         self.userObj = user;
         self.writeConfig();
